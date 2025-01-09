@@ -40,8 +40,7 @@ export default function Carousel() {
   useEffect(() => {
     fetchSlides().then((data) => setSlides(data));
 
-    let interval: NodeJS.Timeout;
-    interval = setInterval(() => {
+    const interval: NodeJS.Timeout = setInterval(() => {
       nextSlide();
     }, 5000);
     return () => clearInterval(interval);
