@@ -18,7 +18,6 @@ interface Slide {
 
 export default function Carousel() {
   const [currentSlide, setCurrentSlide] = useState(0);
-  const [isPlaying, setIsPlaying] = useState(true);
   const [slides, setSlides] = useState<Slide[]>([]);
 
   const fetchSlides = async () => {
@@ -41,18 +40,16 @@ export default function Carousel() {
   useEffect(() => {
     fetchSlides().then((data) => setSlides(data));
 
-    let interval: any;
-    if (isPlaying) {
-      interval = setInterval(() => {
-        nextSlide();
-      }, 5000);
-    }
+    let interval: NodeJS.Timeout;
+    interval = setInterval(() => {
+      nextSlide();
+    }, 5000);
     return () => clearInterval(interval);
-  }, [isPlaying, nextSlide]);
+  }, [nextSlide]);
 
   return (
     <div className='w-full h-[500px] flex justify-center items-center perspective-[1000px] bg-neutral-100'>
-      <div className='relative w-[800px] h-[500px]'>
+      <div className='relative w-screen h-[500px] md:w-[800px] md:h-[500px]'>
         {slides.map((slide: Slide, index: number) => {
           let transform = 'scale(0.6) translateX(0) rotateY(0)';
           let zIndex = 0;
@@ -75,7 +72,7 @@ export default function Carousel() {
           return (
             <div
               key={slide.slug}
-              className='absolute w-[800px] h-full transition-all duration-500 transform-style-preserve-3d'
+              className='absolute md:w-[800px] h-full transition-all duration-500 transform-style-preserve-3d'
               style={{
                 transform,
                 opacity: index === currentSlide ? 1 : 0.6,
@@ -92,13 +89,16 @@ export default function Carousel() {
                 <Image
                   src={slide.featuredImg.url}
                   alt={slide.title}
-                  className='w-full h-full object-cover rounded-lg'
-                  fill
+                  className='h-full w-full object-cover md:rounded-lg'
+                  width={500}
+                  height={1200}
                 />
-                <div className='absolute inset-0 bg-black bg-opacity-40 rounded-lg'>
+                <div className='absolute inset-0 bg-black bg-opacity-40 md:rounded-lg'>
                   <div className='absolute bottom-0 left-0 right-0 p-8 text-white'>
-                    <h2 className='text-4xl font-bold mb-4'>{slide.title}</h2>
-                    <p className='text-xl'>{slide.excerpt}</p>
+                    <h2 className='text-2xl font-rubik-bold md:text-4xl mb-4'>
+                      {slide.title}
+                    </h2>
+                    <p className='text-xl font-rubik'>{slide.excerpt}</p>
                   </div>
                 </div>
               </Link>
@@ -123,7 +123,7 @@ export default function Carousel() {
         </button>
 
         <div className='absolute bottom-6 left-1/2 -translate-x-1/2 flex space-x-2 z-10'>
-          {slides.map((_: any, index: number) => (
+          {slides.map((_, index: number) => (
             <button
               key={index}
               onClick={() => goToSlide(index)}
