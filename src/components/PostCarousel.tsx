@@ -16,7 +16,7 @@ interface Slide {
   };
 }
 
-export default function Carousel() {
+export default function MyCarousel() {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [slides, setSlides] = useState<Slide[]>([]);
 
@@ -42,41 +42,38 @@ export default function Carousel() {
 
     const interval: NodeJS.Timeout = setInterval(() => {
       nextSlide();
-    }, 5000);
+    }, 4000);
     return () => clearInterval(interval);
   }, [nextSlide]);
 
   return (
-    <div className='w-full h-[500px] flex justify-center items-center perspective-[1000px] bg-neutral-100'>
-      <div className='relative w-screen h-[500px] md:w-[800px] md:h-[500px]'>
+    <div className='w-full h-[400px] flex justify-center items-center perspective-[1000px] bg-primary'>
+      <div className='relative w-screen h-[400px] md:w-[800px] md:h-full'>
         {slides.map((slide: Slide, index: number) => {
-          let transform = 'scale(0.6) translateX(0) rotateY(0)';
-          let zIndex = 0;
+          let transform = 'md:scale-60 md:translate-x-0 md:rotate-y-0';
+          let zIndex = 'z-0';
           if (index === currentSlide) {
-            transform = 'scale(1) translateZ(0)';
-            zIndex = 3;
+            transform = 'md:scale-100 md:translate-z-0';
+            zIndex = 'z-[3]';
           } else if (
             index === currentSlide - 1 ||
             (currentSlide === 0 && index === slides.length - 1)
           ) {
-            transform = 'scale(0.8) translateX(-80%) rotateY(30deg)';
-            zIndex = 2;
+            transform = 'md:scale-75 md:-translate-x-60 md:rotate-y-12';
+            zIndex = 'z-[2]';
           } else if (
             index === currentSlide + 1 ||
             (currentSlide === slides.length - 1 && index === 0)
           ) {
-            transform = 'scale(0.8) translateX(80%) rotateY(-30deg)';
-            zIndex = 2;
+            transform = 'md:scale-75 md:translate-x-60 md:-rotate-y-12';
+            zIndex = 'z-[2]';
           }
           return (
             <div
               key={slide.slug}
-              className='absolute md:w-[800px] h-full transition-all duration-500 transform-style-preserve-3d'
-              style={{
-                transform,
-                opacity: index === currentSlide ? 1 : 0.6,
-                zIndex,
-              }}
+              className={`absolute md:w-[800px] h-full transition-all duration-500 transform-style-preserve-3d ${transform} ${
+                index === currentSlide ? 'opacity-100' : 'opacity-60'
+              } ${zIndex}`}
               aria-hidden={index !== currentSlide}
             >
               <Link
@@ -88,16 +85,18 @@ export default function Carousel() {
                 <Image
                   src={slide.featuredImg.url}
                   alt={slide.title}
-                  className='h-full w-full object-cover md:rounded-lg'
-                  width={500}
-                  height={1200}
+                  className='h-full md:w-full object-cover md:rounded-lg'
+                  width={800}
+                  height={500}
                 />
                 <div className='absolute inset-0 bg-black bg-opacity-40 md:rounded-lg'>
                   <div className='absolute bottom-0 left-0 right-0 p-8 text-white'>
                     <h2 className='text-2xl font-rubik-bold md:text-4xl mb-4'>
                       {slide.title}
                     </h2>
-                    <p className='text-xl font-rubik'>{slide.excerpt}</p>
+                    <p className='text-lg md:text-xl font-rubik'>
+                      {slide.excerpt}
+                    </p>
                   </div>
                 </div>
               </Link>

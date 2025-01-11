@@ -1,11 +1,14 @@
 import type { Metadata } from 'next';
 import { Rubik } from 'next/font/google';
 import './globals.css';
+
 import Navbar from '@/components/Navbar';
+import Footer from '@/components/Footer';
 
 const rubikSans = Rubik({
   variable: '--font-rubik-sans',
   subsets: ['latin'],
+  weight: ['300', '400', '500', '600', '700', '800'],
 });
 
 export const metadata: Metadata = {
@@ -20,9 +23,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang='en'>
-      <body className={`${rubikSans.variable} antialiased bg-neutral-100`}>
+      <body
+        className={`${rubikSans.className} antialiased bg-secondary w-11/12 mx-auto`}
+      >
         <Navbar />
-        {children}
+        <div className='min-h-screen bg-primary rounded-[2rem]'>{children}</div>
+        <Footer />
       </body>
     </html>
   );

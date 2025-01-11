@@ -5,7 +5,7 @@ const graphqlAPI = process.env.NEXT_PUBLIC_GRAPHCMS_ENDPOINT!;
 const getSlides = async () => {
   const query = gql`
     query getPosts {
-      posts() {
+      posts(orderBy: createdAt_DESC, last: 3) {
         title
         excerpt
         slug

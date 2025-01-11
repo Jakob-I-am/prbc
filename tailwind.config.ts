@@ -9,13 +9,23 @@ export default {
   ],
   theme: {
     extend: {
+      keyframes: {
+        slideDown: {
+          '0%': {
+            transform: 'translateY(-100%)',
+            opacity: '0',
+          },
+          '100%': {
+            transform: 'translateY(0)',
+            opacity: '1',
+          },
+        },
+      },
+      animation: {
+        slideDown: 'slideDown 1s ease-in-out forwards',
+      },
       fontFamily: {
         rubik: ['Rubik-Regular', 'sans-serif'],
-        'rubik-bold': ['Rubik-Bold', 'sans-serif'],
-        'rubik-extrabold': ['Rubik-ExtraBold', 'sans-serif'],
-        'rubik-medium': ['Rubik-Medium', 'sans-serif'],
-        'rubik-semibold': ['Rubik-SemiBold', 'sans-serif'],
-        'rubik-light': ['Rubik-Light', 'sans-serif'],
       },
       colors: {
         background: 'hsl(var(--background))',
@@ -29,7 +39,7 @@ export default {
           foreground: 'hsl(var(--popover-foreground))',
         },
         primary: {
-          DEFAULT: 'hsl(var(--primary))',
+          DEFAULT: 'var(--primary)',
           foreground: 'hsl(var(--primary-foreground))',
         },
         secondary: {
@@ -45,7 +55,7 @@ export default {
           foreground: 'hsl(var(--accent-foreground))',
         },
         destructive: {
-          DEFAULT: 'hsl(var(--destructive))',
+          DEFAULT: 'var(--destructive)',
           foreground: 'hsl(var(--destructive-foreground))',
         },
         border: 'hsl(var(--border))',
@@ -66,5 +76,8 @@ export default {
       },
     },
   },
-  plugins: [require('tailwindcss-animate')],
+  plugins: [
+    require('tailwindcss-animate'),
+    require('tailwindcss-3d')({ legacy: true }),
+  ],
 } satisfies Config;
