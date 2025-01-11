@@ -1,8 +1,11 @@
 export default function AboutPage() {
   return (
-    <div>
+    <div className='space-y-10'>
       <div className='space-y-5'>
-        <div className='text-lg md:text-xl text-center font-rubik p-4 space-y-5'>
+        <h1 className='text-3xl md:text-4xl text-destructive text-center uppercase pt-5 font-bold'>
+          About Us
+        </h1>
+        <div className='text-2xl md:text-3xl text-center text-secondary px-4 py-6 md:py-10 md:w-10/12 mx-auto space-y-5'>
           <p className=''>
             The Parkes Railway Bowling Club is a vibrant hub of activity,
             offering an array of entertainment and social opportunities for the
@@ -34,16 +37,54 @@ export default function AboutPage() {
         </div>
       </div>
 
-      <div className=''>
-        <p className='font-rubik'>
-          The Parkes Railway Bowling Club is located at 70/78 Hooley Street
+      <hr />
+
+      <div className='md:flex md:flex-row md:items-center md:justify-evenly'>
+        <p className='text-3xl md:text-4xl text-destructive pl-4 text-center font-bold'>
+          Opening Hours:
         </p>
-        <div className='md:border-2 md:border-blue-200 md:rounded'>
+        <ul className='text-2xl md:text-3xl text-secondary pl-4 space-y-2 block'>
+          <li>
+            <p>Monday:</p>
+            <p className='pl-4'>Closed</p>
+          </li>
+          <li>
+            <p>Tuesday:</p>
+            <p className='pl-4'>Closed</p>
+          </li>
+          <li>
+            <p>Wednesday:</p>
+            <p className='pl-4'>3:00pm - 7:00pm</p>
+          </li>
+          <li>
+            <p>Thursday:</p>
+            <p className='pl-4'>3:00pm - 7:00pm</p>
+          </li>
+        </ul>
+        <ul className='text-2xl md:text-3xl text-secondary pl-4 space-y-2 block'>
+          <li>
+            <p>Friday:</p>
+            <p className='pl-4'>11:30am - 12:00am</p>
+          </li>
+
+          <li>
+            <p>Saturday:</p>
+            <p className='pl-4'>10:00am - 12:00pm</p>
+          </li>
+          <li>
+            <p>Sunday:</p>
+            <p className='pl-4'>10:00am - 12:00pm</p>
+          </li>
+        </ul>
+      </div>
+
+      <div className='w-11/12 md:w-9/12 mx-auto pb-5'>
+        <div className=''>
           <iframe
             width='100%'
             id='gmap_canvas'
             src='https://maps.google.com/maps?q=parkes%20railway%20bowling%20club&t=&z=16&ie=UTF8&iwloc=&output=embed'
-            className='p-2 h-[500px] md:h-[600px]'
+            className='p-2 h-[500px] md:h-[600px] rounded-[2rem]'
           ></iframe>
         </div>
       </div>

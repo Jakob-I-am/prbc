@@ -77,7 +77,7 @@ export default function MyCarousel() {
               aria-hidden={index !== currentSlide}
             >
               <Link
-                href={`/${slide.slug}`}
+                href={`/news/${slide.slug}`}
                 className='block w-full h-full transition-transform duration-300 hover:scale-[1.02] focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2'
                 aria-label={`View more about ${slide.title}`}
                 tabIndex={index === currentSlide ? 0 : -1}

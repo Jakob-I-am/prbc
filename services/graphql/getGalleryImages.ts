@@ -5,7 +5,7 @@ const graphqlAPI = process.env.NEXT_PUBLIC_GRAPHCMS_ENDPOINT!;
 const getGalleryImages = async () => {
   const query = gql`
     query getGalleryImages {
-      galleryImages(last: 15, orderBy: createdAt_DESC) {
+      galleryImages(last: 10, orderBy: createdAt_DESC) {
         imageName
         description
         image {

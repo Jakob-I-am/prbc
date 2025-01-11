@@ -30,6 +30,10 @@ const links: Option[] = [
     name: 'Bowls',
     slug: '/bowls',
   },
+  {
+    name: 'Events',
+    slug: '/events',
+  },
 ];
 
 const buttons: Option[] = [
@@ -69,7 +73,7 @@ export default function Navbar() {
             {links.map((link) => (
               <Link
                 key={link.name}
-                className='text-gray-800 hover:text-destructive px-3 py-2 rounded-md text-lg font-medium'
+                className='text-gray-800 hover:text-destructive px-3 py-2 rounded-md text-lg font-medium uppercase'
                 href={link.slug}
               >
                 {link.name}
@@ -85,7 +89,7 @@ export default function Navbar() {
               >
                 <Button
                   variant='destructive'
-                  className='text-lg font-medium'
+                  className='text-lg font-medium uppercase'
                 >
                   {button.name}
                 </Button>
@@ -118,7 +122,7 @@ export default function Navbar() {
             <Link
               onClick={() => setIsOpen(!isOpen)}
               key={link.name}
-              className='block bg-secondary px-3 py-2 rounded-md text-lg font-medium text-gray-800 hover:text-destructive hover:bg-gray-50 text-center'
+              className='block bg-secondary px-3 py-2 rounded-md text-lg font-medium text-gray-800 hover:text-destructive hover:bg-gray-50 text-center uppercase'
               href={link.slug}
             >
               {link.name}
@@ -133,7 +137,7 @@ export default function Navbar() {
               >
                 <Button
                   variant='destructive'
-                  className='text-lg font-medium w-full'
+                  className='text-lg font-medium w-full uppercase'
                 >
                   {button.name}
                 </Button>

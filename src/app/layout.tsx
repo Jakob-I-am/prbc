@@ -4,6 +4,7 @@ import './globals.css';
 
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
+import { Toaster } from '@/components/ui/sonner';
 
 const rubikSans = Rubik({
   variable: '--font-rubik-sans',
@@ -23,12 +24,15 @@ export default function RootLayout({
 }>) {
   return (
     <html lang='en'>
-      <body
-        className={`${rubikSans.className} antialiased bg-secondary w-11/12 mx-auto`}
-      >
-        <Navbar />
-        <div className='min-h-screen bg-primary rounded-[2rem]'>{children}</div>
-        <Footer />
+      <body className='bg-secondary'>
+        <div className={`${rubikSans.className} antialiased w-11/12 mx-auto`}>
+          <Navbar />
+          <main className='min-h-screen bg-primary rounded-[2rem]'>
+            {children}
+          </main>
+          <Toaster closeButton />
+          <Footer />
+        </div>
       </body>
     </html>
   );
