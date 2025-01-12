@@ -39,11 +39,11 @@ const links: Option[] = [
 const buttons: Option[] = [
   {
     name: 'Contact Us',
-    slug: '#contact-form',
+    slug: '/contact-form',
   },
   {
     name: 'Bowls Nominations',
-    slug: '#bowlsnoms-form',
+    slug: '/noms',
   },
 ];
 
@@ -89,7 +89,7 @@ export default function Navbar() {
               >
                 <Button
                   variant='destructive'
-                  className='text-lg font-medium uppercase'
+                  className='text-lg font-medium uppercase hover:scale-[1.02]'
                 >
                   {button.name}
                 </Button>
@@ -137,7 +137,7 @@ export default function Navbar() {
               >
                 <Button
                   variant='destructive'
-                  className='text-lg font-medium w-full uppercase'
+                  className='text-lg font-medium w-full uppercase hover:scale-[1.02]'
                 >
                   {button.name}
                 </Button>

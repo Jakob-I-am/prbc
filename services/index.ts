@@ -1,5 +1,5 @@
-export { default as postComment } from './graphql/postComment';
-export { default as getComments } from './graphql/getComments';
+export { default as postNominee } from './graphql/postNominee';
+export { default as postContact } from './graphql/postContact';
 export { default as getPosts } from './graphql/getPosts';
 export { default as getSlides } from './graphql/getSlides';
 export { default as getRecentPosts } from './graphql/getRecentPosts';

@@ -1,5 +1,6 @@
 'use client';
 
+import { useState, useTransition } from 'react';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
@@ -16,7 +17,8 @@ import {
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
-import { toast } from 'sonner';
+import { useToast } from '@/hooks/use-toast';
+import { postContact } from '../../services';
 
 const formSchema = z.object({
   message: z.string().min(1, {
@@ -32,6 +34,9 @@ const formSchema = z.object({
 });
 
 export default function ContactForm() {
+  const [contactName, setContactName] = useState<string>('');
+  const [isPending, startTransition] = useTransition();
+  const { toast } = useToast();
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -42,18 +47,33 @@ export default function ContactForm() {
   });
 
   function onSubmit(values: z.infer<typeof formSchema>) {
-    // Do something with the form values.
-    // ✅ This will be type-safe and validated.
+    const updatedValues = { body: { ...values } };
+    setContactName(updatedValues.body.name);
 
-    toast.success('Form submitted');
-    console.log(values);
+    startTransition(async () => {
+      const { success } = await postContact({ ...updatedValues });
+
+      if (success) {
+        toast({
+          title: 'Form Submitted',
+          description: `Thank you for contacting us ${contactName}.`,
+          className: 'h-24 border-2 border-green-400 text-lg',
+        });
+      } else {
+        toast({
+          title: 'Uh oh! Something went wrong.',
+          description: 'There was a problem with submitting the form.',
+          variant: 'destructive',
+        });
+      }
+    });
   }
 
   return (
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className='space-y-6'
+        className='space-y-4'
       >
         <FormField
           control={form.control}
@@ -97,8 +117,8 @@ export default function ContactForm() {
               <FormLabel>Message</FormLabel>
               <FormControl>
                 <Textarea
-                  placeholder='What beer do you have on tap?'
-                  className='resize-none'
+                  placeholder='Can we host an event at the bowling club?'
+                  className='resize-none h-24'
                   {...field}
                 />
               </FormControl>
@@ -110,7 +130,15 @@ export default function ContactForm() {
             </FormItem>
           )}
         />
-        <Button type='submit'>Submit</Button>
+        <div className='w-full flex flex-col'>
+          <Button
+            disabled={isPending}
+            type='submit'
+            className='w-6/12 hover:scale-[1.02] self-center'
+          >
+            {isPending ? 'Submitting...' : 'Submit'}
+          </Button>
+        </div>
       </form>
     </Form>
   );

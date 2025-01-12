@@ -3,6 +3,7 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
+import { useState, useTransition } from 'react';
 
 import { Button } from '@/components/ui/button';
 import {
@@ -20,8 +21,9 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
-import { toast } from 'sonner';
 import { Input } from '@/components/ui/input';
+import { useToast } from '@/hooks/use-toast';
+import postNominee from '../../services/graphql/postNominee';
 
 const formSchema = z.object({
   name: z.string().min(1, {
@@ -35,6 +37,9 @@ const formSchema = z.object({
 });
 
 export default function BowlsNomsForm() {
+  const [nomineeName, setNomineeName] = useState<string>('');
+  const [isPending, startTransition] = useTransition();
+  const { toast } = useToast();
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -45,10 +50,26 @@ export default function BowlsNomsForm() {
   });
 
   function onSubmit(values: z.infer<typeof formSchema>) {
-    // Do something with the form values.
-    // ✅ This will be type-safe and validated.
-    toast.success('Form submitted');
-    console.log(values);
+    const updatedValues = { body: { ...values } };
+    setNomineeName(updatedValues.body.name);
+
+    startTransition(async () => {
+      const { success } = await postNominee({ ...updatedValues });
+
+      if (success) {
+        toast({
+          title: `Thank you for nominating ${nomineeName}.`,
+          description: 'Be there 15 minutes early, cant wait to see you there!',
+          className: 'h-24 border-2 border-green-400 text-xl',
+        });
+      } else {
+        toast({
+          title: 'Uh oh! Something went wrong.',
+          description: 'There was a problem with submitting the form.',
+          variant: 'destructive',
+        });
+      }
+    });
   }
 
   return (
@@ -97,7 +118,10 @@ export default function BowlsNomsForm() {
           render={({ field }) => (
             <FormItem>
               <FormLabel>Day and Time</FormLabel>
-              <Select {...field}>
+              <Select
+                onValueChange={field.onChange}
+                defaultValue={field.value}
+              >
                 <SelectTrigger className='w-full'>
                   <SelectValue placeholder='Choose a day and time' />
                 </SelectTrigger>
@@ -109,7 +133,15 @@ export default function BowlsNomsForm() {
             </FormItem>
           )}
         />
-        <Button type='submit'>Submit</Button>
+        <div className='w-full flex flex-col'>
+          <Button
+            disabled={isPending}
+            type='submit'
+            className='w-6/12 hover:scale-[1.02] self-center'
+          >
+            {isPending ? 'Submitting...' : 'Submit'}
+          </Button>
+        </div>
       </form>
     </Form>
   );

@@ -87,11 +87,11 @@ export default function Home() {
         </div>
 
         <Tabs
-          defaultValue='contact'
+          defaultValue='nominations'
           className='flex flex-col md:hidden w-full md:w-1/3 h-full'
         >
-          <TabsList className='w-2/3 self-center'>
-            <TabsTrigger value='contact'>Conatct Us</TabsTrigger>
+          <TabsList className='w-11/12 self-center'>
+            <TabsTrigger value='contact'>Contact Us</TabsTrigger>
             <TabsTrigger value='nominations'>Bowls Nominations</TabsTrigger>
           </TabsList>
           <TabsContent value='contact'>

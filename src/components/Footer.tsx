@@ -21,7 +21,7 @@ export default function Footer() {
 
         <div className='w-full md:w-1/3'>
           <p className='text-2xl md:text-4xl text-center underline'>SITEMAP</p>
-          <ul className='pl-6 flex flex-col justify-center items-start mt-5'>
+          <ul className='pl-6 flex flex-col justify-center items-start mt-5 text-destructive'>
             <li>
               <Link href='Home'>- Home</Link>
             </li>
