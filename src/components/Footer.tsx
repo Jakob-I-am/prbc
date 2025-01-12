@@ -23,25 +23,25 @@ export default function Footer() {
           <p className='text-2xl md:text-4xl text-center underline'>SITEMAP</p>
           <ul className='pl-6 flex flex-col justify-center items-start mt-5 text-destructive'>
             <li>
-              <Link href='Home'>- Home</Link>
+              <Link href='/'>- Home</Link>
             </li>
             <li>
-              <Link href='About'>- About</Link>
+              <Link href='/about'>- About</Link>
             </li>
             <li>
-              <Link href='News'>- News</Link>
+              <Link href='/news'>- News</Link>
             </li>
             <li>
-              <Link href='Bowls'>- Bowls</Link>
+              <Link href='/bowls'>- Bowls</Link>
             </li>
             <li>
-              <Link href='Events'>- Events</Link>
+              <Link href='/events'>- Events</Link>
             </li>
             <li>
-              <Link href='Events'>- Contact Form</Link>
+              <Link href='/contact-form'>- Contact Form</Link>
             </li>
             <li>
-              <Link href='Events'>- Bowls Nominations Form</Link>
+              <Link href='/noms'>- Bowls Nominations Form</Link>
             </li>
           </ul>
         </div>

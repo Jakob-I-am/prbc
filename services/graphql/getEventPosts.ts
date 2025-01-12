@@ -39,8 +39,11 @@ export interface Category {
 
 export default async () => {
   const query = gql`
-    query getPosts {
-      posts(orderBy: createdAt_DESC) {
+    query getBowlsPosts {
+      posts(
+        orderBy: createdAt_DESC
+        where: { postType_contains_some: Events }
+      ) {
         id
         title
         excerpt
@@ -52,7 +55,6 @@ export default async () => {
           url
         }
         createdAt
-        postType
       }
     }
   `;

@@ -1,8 +1,9 @@
 import { request, gql } from 'graphql-request';
+import { Post } from './getPosts';
 
 const graphqlAPI = process.env.NEXT_PUBLIC_GRAPHCMS_ENDPOINT!;
 
-const getPostDetails = async (slug: string) => {
+export default async (slug: string) => {
   const query = gql`
     query GetPostDetails($slug: String!) {
       post(where: { slug: $slug }) {
@@ -20,7 +21,7 @@ const getPostDetails = async (slug: string) => {
           url
         }
         content {
-          raw
+          json
         }
         comments(last: 5) {
           comment
@@ -34,5 +35,3 @@ const getPostDetails = async (slug: string) => {
   const result: any = await request(graphqlAPI, query, { slug });
   return result.post;
 };
-
-export default getPostDetails;

@@ -95,7 +95,7 @@ export default function MyCarousel() {
                       {slide.title}
                     </h2>
                     <p className='text-lg md:text-xl font-rubik'>
-                      {slide.excerpt}
+                      {slide.excerpt.slice(0, 80)}...
                     </p>
                   </div>
                 </div>

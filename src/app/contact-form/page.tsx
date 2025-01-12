@@ -1,6 +1,6 @@
 import ContactForm from '@/components/ContactForm';
 
-export default function BowlsNomsPage() {
+export default function ContactPage() {
   return (
     <div className='flex flex-col'>
       <h2 className='text-2xl md:text-5xl text-destructive text-center pt-10 font-bold'>
@@ -12,7 +12,7 @@ export default function BowlsNomsPage() {
         provided, Thank you.
       </p>
 
-      <div className='w-11/12 mx-auto md:w-4/12 h-[29rem] md:h-[29rem] bg-secondary p-4 rounded-xl mt-16'>
+      <div className='w-11/12 mx-auto md:w-4/12 h-[27rem] md:h-[29rem] bg-secondary p-4 rounded-xl mt-16'>
         <ContactForm />
       </div>
     </div>
