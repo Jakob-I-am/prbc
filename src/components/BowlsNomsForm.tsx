@@ -76,7 +76,7 @@ export default function BowlsNomsForm() {
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className='space-y-6'
+        className='space-y-10 flex flex-col'
       >
         <FormField
           control={form.control}
@@ -133,15 +133,14 @@ export default function BowlsNomsForm() {
             </FormItem>
           )}
         />
-        <div className='w-full flex flex-col'>
-          <Button
-            disabled={isPending}
-            type='submit'
-            className='w-6/12 hover:scale-[1.02] self-center'
-          >
-            {isPending ? 'Submitting...' : 'Submit'}
-          </Button>
-        </div>
+
+        <Button
+          disabled={isPending}
+          type='submit'
+          className='w-6/12 border hover:scale-[1.02] hover:bg-secondary hover:text-primary hover:border-primary self-center'
+        >
+          {isPending ? 'Submitting...' : 'Submit'}
+        </Button>
       </form>
     </Form>
   );

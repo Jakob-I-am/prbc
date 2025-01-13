@@ -1,11 +1,22 @@
+import Image from 'next/image';
+
+import logo from '/public/logo.png';
+
 export default function AboutPage() {
   return (
-    <div className='space-y-10'>
+    <div className='col-span-full'>
+      <Image
+        src={logo}
+        height={100}
+        width={100}
+        className='absolute top-5 left-5 size-14 z-10 md:hidden'
+        alt='PRBC logo'
+      />
       <div className='space-y-5'>
-        <h1 className='text-3xl md:text-4xl text-destructive text-center uppercase pt-5 font-bold'>
+        <h1 className='text-3xl md:text-4xl text-destructive text-center uppercase pt-[4.25rem] font-bold'>
           About Us
         </h1>
-        <div className='text-2xl md:text-3xl text-center text-secondary px-4 py-6 md:py-10 md:w-10/12 mx-auto space-y-5'>
+        <div className='text-2xl md:text-3xl text-center text-gray-700 px-4 py-6 md:py-10 md:w-10/12 mx-auto space-y-5'>
           <p className=''>
             The Parkes Railway Bowling Club is a vibrant hub of activity,
             offering an array of entertainment and social opportunities for the
@@ -39,7 +50,10 @@ export default function AboutPage() {
 
       <hr />
 
-      <div className='md:flex md:flex-row md:items-center md:justify-evenly'>
+      <div
+        className='md:flex md:flex-row md:items-center md:justify-evenly'
+        id='membership'
+      >
         <p className='text-3xl md:text-4xl text-destructive pl-4 text-center font-bold'>
           Opening Hours:
         </p>
@@ -78,7 +92,10 @@ export default function AboutPage() {
         </ul>
       </div>
 
-      <div className='w-11/12 md:w-9/12 mx-auto pb-5'>
+      <div
+        className='w-11/12 md:w-9/12 mx-auto pb-5'
+        id='dining'
+      >
         <div className=''>
           <iframe
             width='100%'

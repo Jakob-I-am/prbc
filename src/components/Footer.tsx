@@ -6,11 +6,11 @@ import { Facebook, Inbox, MapPinned, Phone } from 'lucide-react';
 
 export default function Footer() {
   return (
-    <>
+    <div className='col-span-full'>
       <div className='flex flex-col md:flex-row items-center justify-center md:justify-evenly my-5 space-y-5'>
         <div>
           <Image
-            className='h-60 w-60 md:h-96 md:w-96'
+            className='h-[150px] w-[150px] md:h-96 md:w-96'
             src={logo}
             alt='Company Logo'
             width={70}
@@ -19,7 +19,7 @@ export default function Footer() {
           />
         </div>
 
-        <div className='w-full md:w-1/3'>
+        {/* <div className='w-full md:w-1/3 flex flex-col md:items-center justify-center'>
           <p className='text-2xl md:text-4xl text-center underline'>SITEMAP</p>
           <ul className='pl-6 flex flex-col justify-center items-start mt-5 text-destructive'>
             <li>
@@ -44,9 +44,9 @@ export default function Footer() {
               <Link href='/noms'>- Bowls Nominations Form</Link>
             </li>
           </ul>
-        </div>
+        </div> */}
 
-        <div className='w-full md:w-1/3'>
+        <div className='w-full md:w-1/3 flex flex-col items-center justify-center'>
           <p className='text-2xl md:text-4xl text-center underline'>
             CONTACT INFO
           </p>
@@ -83,14 +83,14 @@ export default function Footer() {
           </ul>
         </div>
       </div>
-      <div className='w-full h-12 bg-primary rounded-full mb-5 flex flex-col items-center justify-center'>
-        <p className='text-lg md:text-xl text-secondary text-center uppercase'>
+      <div className='w-full h-12 bg-primary flex flex-col items-center justify-center'>
+        <h6 className='text-lg md:text-xl text-secondary text-center uppercase'>
           &copy; parkes railway bowling club
-        </p>
+        </h6>
         <p className='text-xs text-secondary text-center'>
-          Built by Jakob Johnson
+          Built by Harry Lewin & Jakob Johnson
         </p>
       </div>
-    </>
+    </div>
   );
 }

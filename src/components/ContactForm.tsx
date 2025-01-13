@@ -73,7 +73,7 @@ export default function ContactForm() {
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className='space-y-4'
+        className='space-y-3'
       >
         <FormField
           control={form.control}
@@ -134,7 +134,7 @@ export default function ContactForm() {
           <Button
             disabled={isPending}
             type='submit'
-            className='w-6/12 hover:scale-[1.02] self-center'
+            className='w-6/12 border hover:scale-[1.02] hover:bg-secondary hover:text-primary hover:border-primary self-center'
           >
             {isPending ? 'Submitting...' : 'Submit'}
           </Button>

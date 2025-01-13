@@ -1,27 +1,45 @@
 import { Quote } from 'lucide-react';
 import Link from 'next/link';
+import Image from 'next/image';
 
-import PostCarousel from '@/components/PostCarousel';
 import GalleryCarousel from '@/components/GalleryCarousel';
 import ContactForm from '@/components/ContactForm';
 import BowlsNomsForm from '@/components/BowlsNomsForm';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import PostCarousel from '@/components/PostCarousel';
+import FeatureCard from '@/components/FeatureCard';
+import { featureCardDetails } from '@/lib/utils';
+import bgImage from '/public/bgImage.jpg';
+import logo from '/public/logo.png';
 
 export default function Home() {
   return (
-    <div>
-      <div className='flex flex-col md:h-full md:items-center md:justify-center space-y-16 md:space-y-32 pb-20 md:p-12'>
-        <div className='h-[15rem] md:h-[15rem] flex flex-col md:flex-row items-center justify-center space-y-5 md:space-x-12'>
-          <h1 className='text-4xl font-bold md:text-7xl text-secondary text-center'>
-            <span className='md:-translate-x-10 -translate-x-4 inline-block'>
-              Parkes Railway
-            </span>
-            <br />
-            <span className='inline-block md:translate-x-10 translate-x-6'>
-              Bowling Club
-            </span>
+    <div className='md:col-span-full'>
+      <div className='h-[calc(100vh-15rem)] md:h-[calc(100vh-20rem)] w-full relative'>
+        <Image
+          src={bgImage}
+          className='h-full w-full object-cover object-right'
+          alt='Picture of the Bowling club'
+        />
+        <Image
+          src={logo}
+          height={100}
+          width={100}
+          className='absolute top-5 left-5 size-14 z-10 md:hidden'
+          alt='PRBC logo'
+        />
+        <div className='absolute inset-0 bg-blue-500 bg-opacity-85' />
+        <div className='absolute top-[40%] left-0 md:left-[10%] right-0 p-8 text-secondary space-y-3 md:space-y-1'>
+          <h1 className='text-3xl md:text-7xl font-bold uppercase leading-tight drop-shadow-[0_0_3px_rgba(239,68,68,1)]'>
+            <span className='block'>Parkes Railway</span>
+            <span className='block'>Bowling Club</span>
           </h1>
-          <h2 className='text-3xl md:text-5xl font-bold text-secondary text-center py-5'>
+          <p className='text-sm md:text-xl md:w-[50%]'>
+            The Parkes Railway Bowling Club is a vibrant hub of activity,
+            offering an array of entertainment and social opportunities for the
+            local community.
+          </p>
+          <h2 className='text-2xl md:text-5xl font-bold'>
             <Quote
               className='inline transform rotate-180 -translate-y-3 h-4 w-4 md:w-7 md:h-7'
               color='#ef4444'
@@ -35,88 +53,76 @@ export default function Home() {
             />
           </h2>
         </div>
+      </div>
 
-        <div>
-          <h4 className='text-secondary text-2xl md:text-4xl mb-5 pl-4 md:pl-0'>
-            Recent News
-          </h4>
-          <PostCarousel />
+      <div className='bg-primary h-[15rem]'>
+        <PostCarousel />
+      </div>
+
+      <div className='bg-secondary my-5 md:my-24 flex flex-col md:flex-row space-y-5 md:space-y-0 md:space-x-5 md:mx-5'>
+        {featureCardDetails.map((detail) => (
+          <FeatureCard
+            image={detail.image}
+            buttonText={detail.buttonText}
+            slug={detail.slug}
+          />
+        ))}
+      </div>
+
+      <div className='hidden md:flex md:flex-row items-center md:justify-center space-x-10 bg-primary py-10'>
+        <div className='md:w-1/4 md:h-[27rem] bg-secondary p-4 rounded'>
+          <p className='text-destructive text-center text-2xl'>Contact Us</p>
+          <ContactForm />
         </div>
-
-        <div className='px-4 md:w-1/2 mx-auto'>
-          <p className='text-2xl md:text-4xl text-secondary text-center'>
-            The Parkes Railway Bowling Club is a vibrant hub of activity,
-            offering an array of entertainment and social opportunities for the
-            local community. Our doors are open from Wednesday through Sunday,
-            inviting you to enjoy a range of engaging experiences.
+        <div className='md:w-1/4 md:h-[27rem] bg-secondary p-4 rounded'>
+          <p className='text-destructive text-center text-2xl'>
+            Bowls Nominations
           </p>
-          <div className='text-right mt-3'>
-            <Link
-              className='text-2xl md:text-4xl text-destructive font-semibold'
-              href='/about'
-            >
-              - Find Out More About Us
-            </Link>
-          </div>
+          <BowlsNomsForm />
         </div>
+      </div>
 
-        <div>
-          <h4 className='text-secondary text-2xl md:text-4xl mb-5 pl-4 md:pl-0'>
-            Recent Images
-          </h4>
-          <GalleryCarousel />
-        </div>
-
-        <div className='hidden md:flex flex-col md:flex-row w-full h-full items-center justify-center md:justify-evenly'>
-          <div
-            id='contact-form'
-            className='w-11/12 md:w-1/3 h-[29rem] md:h-[27rem] mb-10 md:mb-0 bg-secondary p-4 rounded-xl'
+      <Tabs
+        defaultValue='nominations'
+        className='flex flex-col md:hidden col-span-full bg-primary py-10'
+      >
+        <TabsList className='w-10/12 self-center rounded'>
+          <TabsTrigger
+            className='rounded'
+            value='contact'
           >
-            <p className='text-destructive text-center text-2xl'>Contact Us</p>
+            Contact Us
+          </TabsTrigger>
+          <TabsTrigger
+            className='rounded'
+            value='nominations'
+          >
+            Bowls Nominations
+          </TabsTrigger>
+        </TabsList>
+        <TabsContent value='contact'>
+          <div className='w-11/12 mx-auto h-[29rem] bg-secondary p-4 rounded'>
+            <h4 className='text-destructive text-center text-2xl uppercase'>
+              Contact Us
+            </h4>
             <ContactForm />
           </div>
-          <div
-            id='bowlsnoms-form'
-            className='w-11/12 md:w-1/3 h-[24rem] md:h-[27rem] bg-secondary p-4 rounded-xl'
-          >
-            <p className='text-destructive text-center text-2xl'>
+        </TabsContent>
+        <TabsContent value='nominations'>
+          <div className='w-11/12 mx-auto h-[29rem] bg-secondary p-4 rounded'>
+            <p className='text-destructive text-center text-2xl uppercase'>
               Bowls Nominations
             </p>
             <BowlsNomsForm />
           </div>
-        </div>
+        </TabsContent>
+      </Tabs>
 
-        <Tabs
-          defaultValue='nominations'
-          className='flex flex-col md:hidden w-full md:w-1/3 h-full'
-        >
-          <TabsList className='w-11/12 self-center'>
-            <TabsTrigger value='contact'>Contact Us</TabsTrigger>
-            <TabsTrigger value='nominations'>Bowls Nominations</TabsTrigger>
-          </TabsList>
-          <TabsContent value='contact'>
-            <div
-              id='contact-form'
-              className='w-11/12 mx-auto md:w-full h-[29rem] md:h-[27rem] mb-10 md:mb-0 bg-secondary p-4 rounded-xl'
-            >
-              <p className='text-destructive text-center text-2xl'>
-                Contact Us
-              </p>
-              <ContactForm />
-            </div>
-          </TabsContent>
-          <TabsContent value='nominations'>
-            <div
-              id='bowlsnoms-form'
-              className='w-11/12 mx-auto md:w-full h-[29rem] md:h-[27rem] bg-secondary p-4 rounded-xl'
-            >
-              <p className='text-destructive text-center text-2xl'>
-                Bowls Nominations
-              </p>
-              <BowlsNomsForm />
-            </div>
-          </TabsContent>
-        </Tabs>
+      <div className='bg-primary h-[18rem] md:h-[30rem]'>
+        <h4 className='text-secondary uppercase text-2xl md:text-4xl pl-4 md:text-center'>
+          Recent Images
+        </h4>
+        <GalleryCarousel />
       </div>
     </div>
   );

@@ -34,6 +34,14 @@ const links: Option[] = [
     name: 'Events',
     slug: '/events',
   },
+  {
+    name: 'Membership',
+    slug: '/about#membership',
+  },
+  {
+    name: 'Dining',
+    slug: '/about#dining',
+  },
 ];
 
 const buttons: Option[] = [
@@ -51,14 +59,18 @@ export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <nav className={'w-full h-20 py-1 bg-secondary sticky top-0 z-50 mb-2'}>
+    <nav
+      className={
+        'w-full bg-transparent relative md:h-20 md:py-1 md:bg-secondary md:sticky md:top-0 md:z-50'
+      }
+    >
       <div className='px-8 sm:px-6 lg:px-8'>
         <div className='flex justify-between items-center'>
           {/* Logo */}
           <div className='flex-shrink-0 flex items-center'>
             <Link href='/'>
               <Image
-                className=''
+                className='hidden md:block'
                 src={logo}
                 alt='Company Logo'
                 width={70}
@@ -89,7 +101,7 @@ export default function Navbar() {
               >
                 <Button
                   variant='destructive'
-                  className='text-lg font-medium uppercase hover:scale-[1.02]'
+                  className='text-lg font-medium uppercase border hover:scale-[1.02] hover:bg-secondary hover:text-destructive hover:border-destructive rounded'
                 >
                   {button.name}
                 </Button>
@@ -98,14 +110,26 @@ export default function Navbar() {
           </div>
 
           {/* Mobile menu button */}
-          <div className='md:hidden flex items-center'>
+          <div className='flex items-center absolute top-5 right-5 md:hidden z-30'>
             <button
               onClick={() => setIsOpen(!isOpen)}
               className='inline-flex items-center justify-center p-2 rounded-md text-gray-700 hover:text-gray-900 focus:outline-none'
               aria-expanded='false'
               aria-label='Toggle navigation menu'
             >
-              {isOpen ? <X size={24} /> : <Menu size={24} />}
+              <div className='bg-secondary h-9 w-9 flex items-center justify-center rounded'>
+                {isOpen ? (
+                  <X
+                    size={30}
+                    stroke='#3b82f6'
+                  />
+                ) : (
+                  <Menu
+                    size={30}
+                    stroke='#3b82f6'
+                  />
+                )}
+              </div>
             </button>
           </div>
         </div>
@@ -113,22 +137,22 @@ export default function Navbar() {
 
       {/* Mobile menu */}
       <div
-        className={`flex justify-center bg-secondary md:hidden ${
+        className={`flex bg-secondary md:hidden absolute top-0 w-full z-20 ${
           isOpen ? 'block' : 'hidden'
         }`}
       >
-        <div className='px-2 pt-2 pb-3 space-y-1 sm:px-3'>
+        <div className='pt-14 pb-3'>
           {links.map((link) => (
             <Link
               onClick={() => setIsOpen(!isOpen)}
               key={link.name}
-              className='block bg-secondary px-3 py-2 rounded-md text-lg font-medium text-gray-800 hover:text-destructive hover:bg-gray-50 text-center uppercase'
+              className='block bg-secondary px-3 py-2 rounded-md text-md font-medium text-gray-800 hover:text-destructive hover:bg-gray-50 uppercase'
               href={link.slug}
             >
               {link.name}
             </Link>
           ))}
-          <div className='w-full flex flex-col space-y-1'>
+          <div className='flex flex-col w-[100vw] space-y-2 px-2 pt-4'>
             {buttons.map((button) => (
               <Link
                 onClick={() => setIsOpen(!isOpen)}
@@ -137,7 +161,7 @@ export default function Navbar() {
               >
                 <Button
                   variant='destructive'
-                  className='text-lg font-medium w-full uppercase hover:scale-[1.02]'
+                  className='text-md w-full font-medium uppercase border hover:scale-[1.02] hover:bg-secondary hover:text-destructive hover:border-destructive rounded'
                 >
                   {button.name}
                 </Button>

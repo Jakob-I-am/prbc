@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { Rubik } from 'next/font/google';
+import { Rubik, Inter } from 'next/font/google';
 import './globals.css';
 
 import Navbar from '@/components/Navbar';
@@ -8,6 +8,12 @@ import { Toaster } from '@/components/ui/toaster';
 
 const rubikSans = Rubik({
   variable: '--font-rubik-sans',
+  subsets: ['latin'],
+  weight: ['300', '400', '500', '600', '700', '800'],
+});
+
+export const inter = Inter({
+  variable: '--font-inter',
   subsets: ['latin'],
   weight: ['300', '400', '500', '600', '700', '800'],
 });
@@ -25,15 +31,14 @@ export default function RootLayout({
   return (
     <html lang='en'>
       <body className='bg-secondary'>
-        <div
-          className={`${rubikSans.className} antialiased md:w-11/12 mx-auto`}
-        >
+        <div className={`${rubikSans.className} antialiased`}>
           <Navbar />
-          <main className='min-h-screen bg-primary rounded-[2rem]'>
+          <main className='grid grid-cols-1 md:grid-cols-12'>
             {children}
+
+            <Toaster />
+            <Footer />
           </main>
-          <Toaster />
-          <Footer />
         </div>
       </body>
     </html>
