@@ -61,7 +61,7 @@ export default function Navbar() {
   return (
     <nav
       className={
-        'w-full bg-transparent relative md:h-20 md:py-1 md:bg-secondary md:sticky md:top-0 md:z-50'
+        'w-full bg-transparent relative md:py-1 md:bg-secondary md:sticky md:top-0 md:z-50'
       }
     >
       <div className='px-8 sm:px-6 lg:px-8'>

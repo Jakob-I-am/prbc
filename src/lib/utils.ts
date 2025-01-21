@@ -15,20 +15,24 @@ export const featureCardDetails = [
     buttonText: 'Events',
     image: event.src,
     slug: '/events',
+    col: 1,
   },
   {
     buttonText: 'Bowls',
     image: bowls.src,
     slug: '/bowls',
+    col: 4,
   },
   {
     buttonText: 'Membership',
     image: membership.src,
     slug: '/about#membership',
+    col: 7,
   },
   {
     buttonText: 'Dining',
     image: dining.src,
     slug: '/about#dining',
+    col: 10,
   },
 ];

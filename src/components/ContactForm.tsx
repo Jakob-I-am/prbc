@@ -1,52 +1,45 @@
 'use client';
 
-import { useState, useTransition } from 'react';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { useState, useTransition } from 'react';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 
-import { Button } from '@/components/ui/button';
 import {
   Form,
-  FormControl,
-  FormDescription,
-  FormField,
   FormItem,
+  FormField,
   FormLabel,
+  FormControl,
   FormMessage,
+  FormDescription,
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
+import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
-import { useToast } from '@/hooks/use-toast';
-import { postContact } from '../../services';
+import FormCardWrapper from '@/components/FormCardWrapper';
 
-const formSchema = z.object({
-  message: z.string().min(1, {
-    message: 'Message must be at least 1 characters.',
-  }),
-  name: z.string().min(1, {
-    message: 'Please enter your full name',
-  }),
-  phone: z
-    .string()
-    .min(8, { message: 'Please enter a valid phone number' })
-    .max(10, { message: 'Please enter a valid phone number' }),
-});
+import { useToast } from '@/hooks/use-toast';
+
+import { postContactSchema } from '@/schemas';
+
+import { postContact } from '@/actions/postContact';
 
 export default function ContactForm() {
   const [contactName, setContactName] = useState<string>('');
   const [isPending, startTransition] = useTransition();
   const { toast } = useToast();
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
+  const form = useForm<z.infer<typeof postContactSchema>>({
+    resolver: zodResolver(postContactSchema),
     defaultValues: {
       message: '',
       name: '',
       phone: '',
+      messageStatus: 'pending',
     },
   });
 
-  function onSubmit(values: z.infer<typeof formSchema>) {
+  function onSubmit(values: z.infer<typeof postContactSchema>) {
     const updatedValues = { body: { ...values } };
     setContactName(updatedValues.body.name);
 
@@ -70,76 +63,76 @@ export default function ContactForm() {
   }
 
   return (
-    <Form {...form}>
-      <form
-        onSubmit={form.handleSubmit(onSubmit)}
-        className='space-y-3'
-      >
-        <FormField
-          control={form.control}
-          name='name'
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Name</FormLabel>
-              <FormControl>
-                <Input
-                  placeholder='John Smith'
-                  type='text'
-                  {...field}
-                />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <FormField
-          control={form.control}
-          name='phone'
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Phone Number</FormLabel>
-              <FormControl>
-                <Input
-                  placeholder='04 *** ***'
-                  type='text'
-                  {...field}
-                />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <FormField
-          control={form.control}
-          name='message'
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Message</FormLabel>
-              <FormControl>
-                <Textarea
-                  placeholder='Can we host an event at the bowling club?'
-                  className='resize-none h-24'
-                  {...field}
-                />
-              </FormControl>
-              <FormDescription>
-                Send us a message and we will get back to you as soon as
-                possible
-              </FormDescription>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <div className='w-full flex flex-col'>
+    <FormCardWrapper headerLabel='Contact Us'>
+      <Form {...form}>
+        <form
+          onSubmit={form.handleSubmit(onSubmit)}
+          className='space-y-3'
+        >
+          <FormField
+            control={form.control}
+            name='name'
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Name</FormLabel>
+                <FormControl>
+                  <Input
+                    placeholder='John Smith'
+                    type='text'
+                    {...field}
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name='phone'
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Phone Number</FormLabel>
+                <FormControl>
+                  <Input
+                    placeholder='04 *** ***'
+                    type='text'
+                    {...field}
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name='message'
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Message</FormLabel>
+                <FormControl>
+                  <Textarea
+                    placeholder='Can we host an event at the bowling club?'
+                    className='resize-none h-24'
+                    {...field}
+                  />
+                </FormControl>
+                <FormDescription>
+                  Send us a message and we will get back to you as soon as
+                  possible
+                </FormDescription>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
           <Button
             disabled={isPending}
             type='submit'
-            className='w-6/12 border hover:scale-[1.02] hover:bg-secondary hover:text-primary hover:border-primary self-center'
+            className='w-6/12'
           >
             {isPending ? 'Submitting...' : 'Submit'}
           </Button>
-        </div>
-      </form>
-    </Form>
+        </form>
+      </Form>
+    </FormCardWrapper>
   );
 }

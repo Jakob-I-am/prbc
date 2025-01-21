@@ -17,6 +17,17 @@ export default function AboutPage() {
           About Us
         </h1>
         <div className='text-2xl md:text-3xl text-center text-gray-700 px-4 py-6 md:py-10 md:w-10/12 mx-auto space-y-5'>
+          <iframe
+            width='70%'
+            height='80%'
+            src='https://www.youtube.com/embed/UbbFh6__AB4?si=yKivsb9G0c4f3Zzk'
+            title='YouTube video player'
+            frameBorder='0'
+            allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share'
+            referrerPolicy='strict-origin-when-cross-origin'
+            allowFullScreen
+            className='rounded-xl shadow-lg shadow-primary'
+          />
           <p className=''>
             The Parkes Railway Bowling Club is a vibrant hub of activity,
             offering an array of entertainment and social opportunities for the

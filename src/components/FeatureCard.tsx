@@ -27,7 +27,7 @@ export default function FeatureCard({
         <div className='absolute inset-0 bg-black bg-opacity-20 rounded' />
         <div className='absolute bottom-0 left-0 right-0 p-8 text-secondary'>
           <Link href={slug}>
-            <Button className='w-full text-lg md:text-xl border hover:scale-[1.02] hover:bg-secondary hover:text-primary hover:border-primary'>
+            <Button className='bg-primary w-full text-lg md:text-xl border hover:scale-[1.02] hover:bg-secondary hover:text-primary hover:border-primary'>
               {buttonText}
             </Button>
           </Link>

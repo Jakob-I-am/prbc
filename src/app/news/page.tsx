@@ -13,7 +13,7 @@ import {
   CardTitle,
 } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { getPosts } from '../../../services';
+import { getPosts } from '@/actions/blogPostActions';
 
 interface Post {
   title: string;

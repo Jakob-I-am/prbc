@@ -10,41 +10,12 @@ export default function Footer() {
       <div className='flex flex-col md:flex-row items-center justify-center md:justify-evenly my-5 space-y-5'>
         <div>
           <Image
-            className='h-[150px] w-[150px] md:h-96 md:w-96'
+            className='h-[150px] w-[150px] md:h-[250px] md:w-[250px]'
             src={logo}
             alt='Company Logo'
-            width={70}
-            height={70}
             priority
           />
         </div>
-
-        {/* <div className='w-full md:w-1/3 flex flex-col md:items-center justify-center'>
-          <p className='text-2xl md:text-4xl text-center underline'>SITEMAP</p>
-          <ul className='pl-6 flex flex-col justify-center items-start mt-5 text-destructive'>
-            <li>
-              <Link href='/'>- Home</Link>
-            </li>
-            <li>
-              <Link href='/about'>- About</Link>
-            </li>
-            <li>
-              <Link href='/news'>- News</Link>
-            </li>
-            <li>
-              <Link href='/bowls'>- Bowls</Link>
-            </li>
-            <li>
-              <Link href='/events'>- Events</Link>
-            </li>
-            <li>
-              <Link href='/contact-form'>- Contact Form</Link>
-            </li>
-            <li>
-              <Link href='/noms'>- Bowls Nominations Form</Link>
-            </li>
-          </ul>
-        </div> */}
 
         <div className='w-full md:w-1/3 flex flex-col items-center justify-center'>
           <p className='text-2xl md:text-4xl text-center underline'>
@@ -63,7 +34,7 @@ export default function Footer() {
             <li className='flex space-x-5'>
               <Inbox color='#ef4444' />
               <Link
-                href='mailto:parkesrailway@google.com'
+                href='mailto:railwaydiggersbc@bigpond.com'
                 className='text-destructive'
               >
                 parkesrailway@google.com
@@ -71,7 +42,7 @@ export default function Footer() {
             </li>
             <li className='flex space-x-5'>
               <MapPinned color='#ef4444' />
-              <p>70/78 Hooley Street Parkes NSW 2870</p>
+              <p>70/28 Hooley Street, Parkes, NSW, 2870</p>
             </li>
             <li className='mt-2 self-center'>
               <div className='bg-destructive rounded-full h-10 w-10 flex items-center justify-center'>
@@ -88,7 +59,7 @@ export default function Footer() {
           &copy; parkes railway bowling club
         </h6>
         <p className='text-xs text-secondary text-center'>
-          Built by Harry Lewin & Jakob Johnson
+          Built by Jakob Johnson
         </p>
       </div>
     </div>

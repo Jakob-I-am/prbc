@@ -1,14 +1,10 @@
+'use server';
+
 import { GraphQLClient, gql } from 'graphql-request';
 
-interface ContactBody {
-  body: {
-    name: string;
-    comment: string;
-    slug: string;
-  };
-}
+import { CommentBody } from '@/lib/ActionsInterfaces';
 
-export default async ({ body }: ContactBody) => {
+export async function postComment({ body }: CommentBody) {
   const client = new GraphQLClient(
     `${process.env.NEXT_PUBLIC_GRAPHCMS_ENDPOINT!}`,
     {
@@ -27,23 +23,18 @@ export default async ({ body }: ContactBody) => {
           post: { connect: { slug: $slug } }
         }
       ) {
-        name
-        comment
+        id
       }
     }
   `;
 
-  const data = {
-    name: body.name,
-    comment: body.comment,
-    slug: body.slug,
-  };
+  const { name, comment, slug } = body;
 
   try {
-    await client.request(mutation, data);
+    await client.request(mutation, { name, comment, slug });
     return { success: true };
   } catch (error) {
     console.log(error);
     return { success: false };
   }
-};
+}

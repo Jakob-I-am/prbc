@@ -1,14 +1,10 @@
+'use server';
+
 import { GraphQLClient, gql } from 'graphql-request';
 
-interface NomineeBody {
-  body: {
-    name: string;
-    phone: string;
-    option: string;
-  };
-}
+import { ContactBody } from '@/lib/ActionsInterfaces';
 
-export default async ({ body }: NomineeBody) => {
+export async function postContact({ body }: ContactBody) {
   const client = new GraphQLClient(
     `${process.env.NEXT_PUBLIC_GRAPHCMS_ENDPOINT!}`,
     {
@@ -19,36 +15,37 @@ export default async ({ body }: NomineeBody) => {
   );
 
   const mutation = gql`
-    mutation createNominee(
+    mutation createContact(
       $name: String!
       $phoneNumber: String!
-      $selectOption: String!
+      $message: String!
+      $messageStatus: MessageStatus!
     ) {
-      createNominee(
+      createContact(
         data: {
           name: $name
           phoneNumber: $phoneNumber
-          selectOption: $selectOption
+          message: $message
+          messageStatus: $messageStatus
         }
       ) {
-        name
-        phoneNumber
-        selectOption
+        id
       }
     }
   `;
 
-  const data = {
-    name: body.name,
-    phoneNumber: body.phone,
-    selectOption: body.option,
-  };
+  const { name, phone, message, messageStatus } = body;
 
   try {
-    await client.request(mutation, data);
+    await client.request(mutation, {
+      name: name,
+      phoneNumber: phone,
+      message: message,
+      messageStatus: messageStatus,
+    });
     return { success: true };
   } catch (error) {
     console.log(error);
     return { success: false };
   }
-};
+}
