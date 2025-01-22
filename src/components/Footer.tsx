@@ -18,10 +18,8 @@ export default function Footer() {
         </div>
 
         <div className='w-full md:w-1/3 flex flex-col items-center justify-center'>
-          <p className='text-2xl md:text-4xl text-center underline'>
-            CONTACT INFO
-          </p>
-          <ul className='pl-6 md:pl-0 flex flex-col justify-start space-y-3 mt-5'>
+          <p className='text-3xl font-bold mb-6 text-center'>Contact Info</p>
+          <ul className='flex flex-col justify-start space-y-3'>
             <li className='flex space-x-5'>
               <Phone color='#ef4444' />
               <Link
@@ -37,7 +35,7 @@ export default function Footer() {
                 href='mailto:railwaydiggersbc@bigpond.com'
                 className='text-destructive'
               >
-                parkesrailway@google.com
+                railwaydiggersbc@bigpond.com
               </Link>
             </li>
             <li className='flex space-x-5'>

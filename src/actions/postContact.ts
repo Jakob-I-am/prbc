@@ -19,6 +19,7 @@ export async function postContact({ body }: ContactBody) {
       $name: String!
       $phoneNumber: String!
       $message: String!
+      $email: String!
       $messageStatus: MessageStatus!
     ) {
       createContact(
@@ -26,6 +27,7 @@ export async function postContact({ body }: ContactBody) {
           name: $name
           phoneNumber: $phoneNumber
           message: $message
+          email: $email
           messageStatus: $messageStatus
         }
       ) {
@@ -34,13 +36,14 @@ export async function postContact({ body }: ContactBody) {
     }
   `;
 
-  const { name, phone, message, messageStatus } = body;
+  const { name, phone, message, email, messageStatus } = body;
 
   try {
     await client.request(mutation, {
-      name: name,
+      name,
       phoneNumber: phone,
       message: message,
+      email,
       messageStatus: messageStatus,
     });
     return { success: true };

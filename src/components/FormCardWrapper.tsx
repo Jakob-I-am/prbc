@@ -4,19 +4,12 @@ import { Card, CardHeader, CardContent } from '@/components/ui/card';
 
 interface FormCardWrapperProps {
   children: React.ReactNode;
-  headerLabel: string;
 }
 
-export default function FormCardWrapper({
-  children,
-  headerLabel,
-}: FormCardWrapperProps) {
+export default function FormCardWrapper({ children }: FormCardWrapperProps) {
   return (
-    <Card className='w-[550px] h-[500px] shadow-xl shadow-primary'>
-      <CardHeader>
-        <p className='text-center text-2xl text-primary'>{headerLabel}</p>
-      </CardHeader>
-      <CardContent>{children}</CardContent>
+    <Card className='md:w-[550px] md:h-[500px] shadow-lg shadow-primary'>
+      <CardContent className='mt-5'>{children}</CardContent>
     </Card>
   );
 }

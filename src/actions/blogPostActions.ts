@@ -2,7 +2,7 @@
 
 import { request, gql } from 'graphql-request';
 
-import { Post } from '@/lib/ActionsInterfaces';
+import { Post, PostData } from '@/lib/ActionsInterfaces';
 
 const graphqlAPI = process.env.NEXT_PUBLIC_GRAPHCMS_ENDPOINT!;
 
@@ -40,6 +40,8 @@ export async function getPostSlides() {
       posts(orderBy: createdAt_DESC, last: 9) {
         title
         slug
+        createdAt
+        excerpt
         featuredImg {
           url
         }
@@ -95,7 +97,8 @@ export async function getPostDetails(slug: string) {
         content {
           json
         }
-        comments(last: 5) {
+        comment(last: 5) {
+          id
           comment
           createdAt
           name
@@ -104,7 +107,7 @@ export async function getPostDetails(slug: string) {
     }
   `;
 
-  const post: Post = await request(graphqlAPI, query, { slug });
+  const { post }: PostData = await request(graphqlAPI, query, { slug });
   return post;
 }
 

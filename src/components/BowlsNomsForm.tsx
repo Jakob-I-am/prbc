@@ -81,11 +81,11 @@ export default function BowlsNomsForm() {
   }
 
   return (
-    <FormCardWrapper headerLabel='Bowls Nominations'>
+    <FormCardWrapper>
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
-          className='space-y-6'
+          className='space-y-8'
         >
           <FormField
             control={form.control}
@@ -144,7 +144,7 @@ export default function BowlsNomsForm() {
           <Button
             disabled={isPending}
             type='submit'
-            className='w-6/12'
+            className='w-3/12 hover:bg-secondary hover:text-primary hover:scale-[1.0125] hover:border hover:border-primary'
           >
             {isPending ? 'Submitting...' : 'Submit'}
           </Button>

@@ -33,7 +33,7 @@ export default function RootLayout({
       <body className='bg-secondary'>
         <div className={`${rubikSans.className} antialiased`}>
           <Navbar />
-          <main className='grid'>
+          <main>
             {children}
 
             <Toaster />

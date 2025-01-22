@@ -1,20 +1,30 @@
+import Image from 'next/image';
+
 import ContactForm from '@/components/ContactForm';
+
+import bgImage from '../../../public/bgImage.jpg';
 
 export default function ContactPage() {
   return (
-    <div className='flex flex-col'>
-      <h2 className='text-2xl md:text-5xl text-destructive text-center pt-10 font-bold'>
-        Contact us
-      </h2>
-      <p className='md:w-6/12 px-4 text-secondary text-2xl md:text-4xl text-center self-center mt-5'>
-        Please use this form to ask any question you may have, and we will
-        contact you with an answer as soon as possible on the phone number
-        provided, Thank you.
-      </p>
-
-      <div className='w-11/12 mx-auto md:w-4/12 h-[27rem] md:h-[29rem] bg-secondary p-4 rounded-xl mt-16'>
-        <ContactForm />
-      </div>
+    <div className='w-full overflow-x-hidden'>
+      <section className='relative h-[40vh] w-full overflow-hidden'>
+        <Image
+          src={bgImage}
+          alt='Bowling club interior'
+          className='absolute inset-0 w-full h-full object-cover'
+        />
+        <div className='absolute inset-0 bg-black/50' />
+        <div className='relative z-10 flex flex-col items-center justify-center h-full text-white px-4'>
+          <h1 className='text-4xl md:text-6xl font-bold text-center mb-4'>
+            Contact us
+          </h1>
+          <p>
+            Please use this form to ask any question you may have, and we will
+            contact you with an answer as soon as possible on the phone number
+            provided, Thank you.
+          </p>
+        </div>
+      </section>
     </div>
   );
 }

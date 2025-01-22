@@ -35,6 +35,7 @@ export default function ContactForm() {
       message: '',
       name: '',
       phone: '',
+      email: '',
       messageStatus: 'pending',
     },
   });
@@ -63,7 +64,7 @@ export default function ContactForm() {
   }
 
   return (
-    <FormCardWrapper headerLabel='Contact Us'>
+    <FormCardWrapper>
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
@@ -105,6 +106,23 @@ export default function ContactForm() {
           />
           <FormField
             control={form.control}
+            name='email'
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Email</FormLabel>
+                <FormControl>
+                  <Input
+                    placeholder='johnsmith@example.com'
+                    type='email'
+                    {...field}
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
             name='message'
             render={({ field }) => (
               <FormItem>
@@ -127,7 +145,7 @@ export default function ContactForm() {
           <Button
             disabled={isPending}
             type='submit'
-            className='w-6/12'
+            className='w-3/12 hover:bg-secondary hover:text-primary hover:scale-[1.0125] hover:border hover:border-primary'
           >
             {isPending ? 'Submitting...' : 'Submit'}
           </Button>

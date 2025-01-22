@@ -1,146 +1,201 @@
+import { ArrowRight, Mail, Phone, MapPin, Quote } from 'lucide-react';
 import { Suspense } from 'react';
-import { Quote } from 'lucide-react';
 import Image from 'next/image';
+import Link from 'next/link';
 
-import GalleryCarousel from '@/components/GalleryCarousel';
+import { Button } from '@/components/ui/button';
+import { Card } from '@/components/ui/card';
 import ContactForm from '@/components/ContactForm';
 import BowlsNomsForm from '@/components/BowlsNomsForm';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import FeatureCard from '@/components/FeatureCard';
-import { featureCardDetails } from '@/lib/utils';
-import bgImage from '/public/bgImage.jpg';
-import logo from '/public/logo.png';
-
 import PostCarousel from '@/components/PostCarousel';
+import ImageCarousel from '@/components/ImageCarousel';
+
+import event from '../../public/event.jpg';
+import membership from '../../public/membership.jpeg';
+import bowls from '../../public/bowls.jpeg';
+import dining from '../../public/dining.jpg';
 
 import { getPostSlides } from '@/actions/blogPostActions';
 import { getGalleryImages } from '@/actions/imageActions';
 
 export default function Home() {
-  const slides = getPostSlides();
+  const posts = getPostSlides();
   const images = getGalleryImages();
 
   return (
-    <div className='grid-cols-1 grid-rows-5 gap-4 md:grid-cols-12 md:grid-rows-5 md:gap-4'>
-      <div className='h-[calc(100vh-15rem)] md:h-[calc(100vh-25rem)]'>
-        <div className=''>
-          <div className=''>
-            <h1 className='md:text-7xl font-bold text-center text-primary'>
-              Parkes Railway Bowling Club
-            </h1>
+    <div className='w-full overflow-x-hidden'>
+      <section className='relative h-[74vh] md:h-[70vh] w-full overflow-hidden'>
+        <img
+          src='https://images.unsplash.com/photo-1599013835026-83ff15455779?q=80&w=2000&auto=format&fit=crop'
+          alt='Bowling club panorama'
+          className='absolute inset-0 w-full h-full object-cover'
+        />
+        <div className='absolute inset-0 bg-black/50' />
+        <div className='relative z-10 flex flex-col items-center justify-center h-full text-white px-4'>
+          <h1 className='text-4xl md:text-6xl font-bold text-center mb-4'>
+            Parkes Railway Bowling Club
+          </h1>
+          <p className='text-2xl md:text-4xl mb-8'>
+            <Quote
+              className='inline transform rotate-180 -translate-y-3 h-4 w-4 md:w-7 md:h-7'
+              color='#ef4444'
+              fill='#ef4444'
+            />{' '}
+            Toot Toot{' '}
+            <Quote
+              className='inline -translate-y-3 h-4 w-4 md:h-7 md:w-7'
+              color='#ef4444'
+              fill='#ef4444'
+            />
+          </p>
+          <div className='md:hidden flex gap-4'>
+            <Link href='/about'>
+              <Button
+                size='lg'
+                variant='default'
+                className='hover:bg-secondary hover:text-primary hover:scale-[1.0125] hover:border hover:border-primary'
+              >
+                About Us
+              </Button>
+            </Link>
+            <Link href='#contact'>
+              <Button
+                size='lg'
+                variant='outline'
+                className='hover:bg-primary hover:text-secondary text-primary hover:scale-[1.0125] hover:border-none'
+              >
+                Contact Us
+              </Button>
+            </Link>
           </div>
+        </div>
+      </section>
 
-          <div className=''>
-            <p className='md:w-8/12 text-2xl mb-12'>
+      <section className='bg-white h-[26vh] md:h-[23vh] w-full overflow-hidden'></section>
+
+      <section className='container mx-auto py-16 px-4'>
+        <div className='grid lg:grid-cols-2 gap-8'>
+          <div className='grid grid-cols-1 sm:grid-cols-2 gap-4'>
+            {[
+              {
+                title: 'Events',
+                image: event.src,
+                slug: '/events',
+              },
+              {
+                title: 'Bowls',
+                image: bowls.src,
+                slug: '/bowls',
+              },
+              {
+                title: 'Membership',
+                image: membership.src,
+                slug: '/about#membership',
+              },
+              {
+                title: 'Dining',
+                image: dining.src,
+                slug: '/about#dining',
+              },
+            ].map((service, index) => (
+              <Card
+                key={index}
+                className='overflow-hidden'
+              >
+                <Image
+                  src={service.image}
+                  alt={service.title}
+                  width={300}
+                  height={300}
+                  className='w-full h-32 object-cover'
+                />
+                <div className='p-4'>
+                  <h3 className='font-semibold mb-2'>{service.title}</h3>
+                  <Link href={service.slug}>
+                    <Button
+                      variant='link'
+                      className='p-0'
+                    >
+                      Learn More <ArrowRight className='ml-2 h-4 w-4' />
+                    </Button>
+                  </Link>
+                </div>
+              </Card>
+            ))}
+          </div>
+          <div className='flex flex-col justify-center'>
+            <h2 className='text-3xl font-bold mb-6'>About Us</h2>
+            <p className='text-lg text-gray-700 mb-6'>
               The Parkes Railway Bowling Club is a vibrant hub of activity,
               offering an array of entertainment and social opportunities for
               the local community. Our doors are open from Wednesday through
               Sunday, inviting you to enjoy a range of engaging experiences.
             </p>
-            <h2 className='md:text-7xl text-primary'>
-              <Quote
-                className='inline transform rotate-180 -translate-y-3 h-4 w-4 md:w-7 md:h-7'
-                color='#ef4444'
-                fill='#ef4444'
-              />{' '}
-              Toot Toot{' '}
-              <Quote
-                className='inline -translate-y-3 h-4 w-4 md:h-7 md:w-7'
-                color='#ef4444'
-                fill='#ef4444'
-              />
-            </h2>
-          </div>
-          <div className=''>
-            <Image
-              src={bgImage}
-              alt='a picture of the bowling club'
-            />
+            <Button className='self-start'>About us</Button>
           </div>
         </div>
-      </div>
-      {/* 
-      <div className='md:col-span-12 md:col-start-1 md:row-start-2'>
-        <div className='bg-primary md:h-[20rem]'>
-          <Suspense fallback={<p>Loading...</p>}>
-            <PostCarousel data={slides} />
-          </Suspense>
-        </div>
+      </section>
+
+      <div className='w-full'>
+        <Suspense fallback={<p>Loading...</p>}>
+          <PostCarousel data={posts} />
+        </Suspense>
       </div>
 
-      <div className='md:col-span-12 md:col-start-1 md:row-start-3 py-12'>
-        <div className='md:grid md:grid-cols-4 md:grid-rows-1'>
-          {featureCardDetails.map((detail) => (
-            <div>
-              <FeatureCard
-                key={detail.slug}
-                image={detail.image}
-                buttonText={detail.buttonText}
-                slug={detail.slug}
-              />
+      <section className='bg-gray-50 py-16'>
+        <div className='container mx-auto px-4'>
+          <div className='grid lg:grid-cols-2 gap-8'>
+            <div className='flex flex-col justify-center'>
+              <h2 className='text-3xl font-bold mb-6'>Get in Touch</h2>
+              <p className='text-lg text-gray-700 mb-6'>
+                Have questions? We'd love to hear from you. Send us a message
+                and we'll respond as soon as possible.
+              </p>
+              <div className='space-y-4'>
+                <div className='flex items-center'>
+                  <Phone className='h-5 w-5 mr-2 text-gray-600' />
+                  <span>(02) 6862 2772</span>
+                </div>
+                <div className='flex items-center'>
+                  <Mail className='h-5 w-5 mr-2 text-gray-600' />
+                  <span>railwaydiggersbc@bigpond.com</span>
+                </div>
+                <div className='flex items-center'>
+                  <MapPin className='h-5 w-5 mr-2 text-gray-600' />
+                  <span>70/28 Hooley Street, Parkes NSW 2870</span>
+                </div>
+              </div>
             </div>
-          ))}
-        </div>
-      </div>
-
-      <div className='md:col-span-12 md:col-start-1 md:row-start-4 my-12'>
-        <div className='md:grid md:grid-cols-12 md:grid-rows-1'>
-          <div className='col-span-5 col-start-2'>
-            <div className='hidden md:block md:place-self-center'>
+            <div
+              className='place-self-end'
+              id='contact'
+            >
               <ContactForm />
             </div>
           </div>
-          <div className='md:col-span-5 md:col-start-7'>
-            <div className='md:col-span-4 md:col-start-8 md:row-start-4'>
-              <div className='hidden md:block md:place-self-center'>
-                <BowlsNomsForm />
-              </div>
-            </div>
-          </div>
         </div>
-      </div>
+      </section>
 
-      <Tabs
-        defaultValue='nominations'
-        className='flex flex-col md:hidden col-span-full py-10'
-      >
-        <TabsList className='w-10/12 self-center rounded'>
-          <TabsTrigger
-            className='rounded'
-            value='contact'
-          >
-            Contact Us
-          </TabsTrigger>
-          <TabsTrigger
-            className='rounded'
-            value='nominations'
-          >
-            Bowls Nominations
-          </TabsTrigger>
-        </TabsList>
-        <TabsContent value='contact'>
-          <div className='w-11/12 mx-auto h-[29rem] bg-secondary p-4 rounded'>
-            <h4 className='text-destructive text-center text-2xl uppercase'>
-              Contact Us
-            </h4>
-            <ContactForm />
-          </div>
-        </TabsContent>
-        <TabsContent value='nominations'>
-          <div className='w-11/12 mx-auto h-[29rem] bg-secondary p-4 rounded'>
-            <p className='text-destructive text-center text-2xl uppercase'>
-              Bowls Nominations
-            </p>
+      <section className='container mx-auto py-16 px-4'>
+        <div className='grid lg:grid-cols-2 gap-8'>
+          <div>
+            <h2 className='text-3xl font-bold mb-6'>
+              Social Bowls Nominations
+            </h2>
             <BowlsNomsForm />
           </div>
-        </TabsContent>
-      </Tabs>
+          <div className='flex flex-col justify-center'>
+            <h3 className='text-2xl font-bold mb-4'>Social Bowls</h3>
+            <p className='space-y-3 text-lg text-gray-700'></p>
+          </div>
+        </div>
+      </section>
 
-      <div className='md:col-span-12 md:col-start-1 md:row-start-5 py-12 bg-primary'>
+      <div className='w-full'>
         <Suspense fallback={<p>Loading...</p>}>
-          <GalleryCarousel data={images} />
+          <ImageCarousel data={images} />
         </Suspense>
-      </div> */}
+      </div>
     </div>
   );
 }

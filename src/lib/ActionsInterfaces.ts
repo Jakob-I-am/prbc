@@ -12,8 +12,36 @@ export interface Post {
   images?: any;
   contentEditor: ContentEditor;
   categories: Category[];
-  comments: Comment[];
+  comment: Comment[];
   createdAt: Date;
+}
+
+export interface Comment {
+  id: string;
+  name: string;
+  email: string;
+  comment: string;
+  createdAt: Date;
+}
+
+export interface PostData {
+  post: {
+    postType: string[];
+    id: string;
+    title: string;
+    featuredImg: {
+      url: string;
+    };
+    excerpt: string;
+    content: any;
+    featuredPost: boolean;
+    slug: string;
+    images?: any;
+    contentEditor: ContentEditor;
+    categories: Category[];
+    comments: Comment[];
+    createdAt: Date;
+  };
 }
 
 export interface ContentEditor {
@@ -36,6 +64,7 @@ export interface PostSlide {
   featuredImg: {
     url: string;
   };
+  createdAt: Date;
 }
 
 export interface CommentBody {
@@ -51,6 +80,7 @@ export interface ContactBody {
     name: string;
     phone: string;
     message: string;
+    email: string;
     messageStatus: string;
   };
 }

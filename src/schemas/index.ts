@@ -10,6 +10,7 @@ export const postContactSchema = z.object({
   phone: z.string().regex(/^[0-9]{8,10}$/, {
     message: 'Please enter a valid phone number',
   }),
+  email: z.string().email({ message: 'Please enter a valid email' }),
   messageStatus: z.string(),
 });
 

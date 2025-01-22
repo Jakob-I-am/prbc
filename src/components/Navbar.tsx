@@ -1,12 +1,21 @@
 'use client';
 
-import { Menu, X } from 'lucide-react';
-import Image from 'next/image';
+import { ChevronDown, Menu, X } from 'lucide-react';
 import { useState } from 'react';
+import Image from 'next/image';
 import Link from 'next/link';
 
-import logo from '../../public/logo.png';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu';
 import { Button } from '@/components/ui/button';
+
+import logo from '../../public/logo.png';
 
 interface Option {
   name: string;
@@ -20,7 +29,7 @@ const links: Option[] = [
   },
   {
     name: 'About',
-    slug: '/about',
+    slug: '',
   },
   {
     name: 'News',
@@ -33,14 +42,6 @@ const links: Option[] = [
   {
     name: 'Events',
     slug: '/events',
-  },
-  {
-    name: 'Membership',
-    slug: '/about#membership',
-  },
-  {
-    name: 'Dining',
-    slug: '/about#dining',
   },
 ];
 
@@ -66,15 +67,14 @@ export default function Navbar() {
     >
       <div className='px-8 sm:px-6 lg:px-8'>
         <div className='flex justify-between items-center'>
-          {/* Logo */}
           <div className='flex-shrink-0 flex items-center'>
             <Link href='/'>
               <Image
                 className='hidden md:block'
                 src={logo}
                 alt='Company Logo'
-                width={70}
-                height={70}
+                width={80}
+                height={80}
                 priority
               />
             </Link>
@@ -82,15 +82,41 @@ export default function Navbar() {
 
           {/* Navigation Links - Desktop */}
           <div className='hidden md:flex items-center space-x-8'>
-            {links.map((link) => (
-              <Link
-                key={link.name}
-                className='text-gray-800 hover:text-destructive px-3 py-2 rounded-md text-lg font-medium uppercase'
-                href={link.slug}
-              >
-                {link.name}
-              </Link>
-            ))}
+            {links.map((link) => {
+              return link.name == 'About' ? (
+                <DropdownMenu key='1'>
+                  <DropdownMenuTrigger className='text-gray-800 hover:text-destructive px-3 py-2 rounded-md text-lg font-medium uppercase flex items-center'>
+                    About{' '}
+                    <ChevronDown
+                      className='pl-2'
+                      size={35}
+                    />
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent className='-mt-3'>
+                    <DropdownMenuItem className='text-base'>
+                      <Link href='/about'>About Us</Link>
+                    </DropdownMenuItem>
+                    <DropdownMenuItem className='text-base'>
+                      <Link href='/about#membership'>Membership</Link>
+                    </DropdownMenuItem>
+                    <DropdownMenuItem className='text-base'>
+                      <Link href='/about#dining'>Bistro</Link>
+                    </DropdownMenuItem>
+                    <DropdownMenuItem className='text-base'>
+                      <Link href='/about#venue'>Venue</Link>
+                    </DropdownMenuItem>
+                  </DropdownMenuContent>
+                </DropdownMenu>
+              ) : (
+                <Link
+                  key={link.name}
+                  className='text-gray-800 hover:text-destructive px-3 py-2 rounded-md text-lg font-medium uppercase'
+                  href={link.slug}
+                >
+                  {link.name}
+                </Link>
+              );
+            })}
           </div>
 
           <div className='hidden md:flex items-center space-x-8'>
@@ -101,7 +127,8 @@ export default function Navbar() {
               >
                 <Button
                   variant='destructive'
-                  className='text-lg font-medium uppercase border hover:scale-[1.02] hover:bg-secondary hover:text-destructive hover:border-destructive rounded'
+                  size='lg'
+                  className='hover:text-destructive text-secondary hover:bg-secondary hover:border hover:border-destructive hover:scale-[1.0125]'
                 >
                   {button.name}
                 </Button>
@@ -117,16 +144,16 @@ export default function Navbar() {
               aria-expanded='false'
               aria-label='Toggle navigation menu'
             >
-              <div className='bg-secondary h-9 w-9 flex items-center justify-center rounded'>
+              <div className='h-9 w-9 flex items-center justify-center rounded'>
                 {isOpen ? (
                   <X
                     size={30}
-                    stroke='#3b82f6'
+                    stroke='#171717'
                   />
                 ) : (
                   <Menu
                     size={30}
-                    stroke='#3b82f6'
+                    stroke='#f5f5f5'
                   />
                 )}
               </div>
@@ -141,17 +168,63 @@ export default function Navbar() {
           isOpen ? 'block' : 'hidden'
         }`}
       >
-        <div className='pt-14 pb-3'>
-          {links.map((link) => (
-            <Link
-              onClick={() => setIsOpen(!isOpen)}
-              key={link.name}
-              className='block bg-secondary px-3 py-2 rounded-md text-md font-medium text-gray-800 hover:text-destructive hover:bg-gray-50 uppercase'
-              href={link.slug}
-            >
-              {link.name}
-            </Link>
-          ))}
+        <div className='pt-14 pb-3 flex flex-col items-start'>
+          {links.map((link) => {
+            return link.name == 'About' ? (
+              <DropdownMenu key='1'>
+                <DropdownMenuTrigger className='text-gray-800 hover:text-destructive px-3 py-2 rounded-md text-lg font-medium uppercase flex items-center'>
+                  About{' '}
+                  <ChevronDown
+                    className='pl-2'
+                    size={35}
+                  />
+                </DropdownMenuTrigger>
+                <DropdownMenuContent className='-mt-3'>
+                  <DropdownMenuItem className='text-base'>
+                    <Link
+                      onClick={() => setIsOpen(!isOpen)}
+                      href='/about'
+                    >
+                      About Us
+                    </Link>
+                  </DropdownMenuItem>
+                  <DropdownMenuItem className='text-base'>
+                    <Link
+                      onClick={() => setIsOpen(!isOpen)}
+                      href='/about#membership'
+                    >
+                      Membership
+                    </Link>
+                  </DropdownMenuItem>
+                  <DropdownMenuItem className='text-base'>
+                    <Link
+                      onClick={() => setIsOpen(!isOpen)}
+                      href='/about#dining'
+                    >
+                      Bistro
+                    </Link>
+                  </DropdownMenuItem>
+                  <DropdownMenuItem className='text-base'>
+                    <Link
+                      onClick={() => setIsOpen(!isOpen)}
+                      href='/about#venue'
+                    >
+                      Venue
+                    </Link>
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+            ) : (
+              <Link
+                key={link.name}
+                className='text-gray-800 hover:text-destructive px-3 py-2 rounded-md text-lg font-medium uppercase'
+                href={link.slug}
+                onClick={() => setIsOpen(!isOpen)}
+              >
+                {link.name}
+              </Link>
+            );
+          })}
           <div className='flex flex-col w-[100vw] space-y-2 px-2 pt-4'>
             {buttons.map((button) => (
               <Link
@@ -161,7 +234,7 @@ export default function Navbar() {
               >
                 <Button
                   variant='destructive'
-                  className='text-md w-full font-medium uppercase border hover:scale-[1.02] hover:bg-secondary hover:text-destructive hover:border-destructive rounded'
+                  className='hover:text-destructive text-secondary hover:bg-secondary hover:border hover:border-destructive hover:scale-[1.0125]'
                 >
                   {button.name}
                 </Button>
