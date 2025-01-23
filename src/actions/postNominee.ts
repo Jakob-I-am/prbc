@@ -2,9 +2,9 @@
 
 import { GraphQLClient, gql } from 'graphql-request';
 
-import { NomineeBody } from '@/lib/ActionsInterfaces';
+import { Nominee } from '@/lib/ActionsInterfaces';
 
-export default async ({ body }: NomineeBody) => {
+export default async ({ name, phone, option }: Nominee) => {
   const client = new GraphQLClient(
     `${process.env.NEXT_PUBLIC_GRAPHCMS_ENDPOINT!}`,
     {
@@ -31,8 +31,6 @@ export default async ({ body }: NomineeBody) => {
       }
     }
   `;
-
-  const { name, phone, option } = body;
 
   try {
     await client.request(mutation, {

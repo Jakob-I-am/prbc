@@ -2,9 +2,15 @@
 
 import { GraphQLClient, gql } from 'graphql-request';
 
-import { ContactBody } from '@/lib/ActionsInterfaces';
+import { Contact } from '@/lib/ActionsInterfaces';
 
-export async function postContact({ body }: ContactBody) {
+export async function postContact({
+  name,
+  phone,
+  message,
+  email,
+  messageStatus,
+}: Contact) {
   const client = new GraphQLClient(
     `${process.env.NEXT_PUBLIC_GRAPHCMS_ENDPOINT!}`,
     {
@@ -35,8 +41,6 @@ export async function postContact({ body }: ContactBody) {
       }
     }
   `;
-
-  const { name, phone, message, email, messageStatus } = body;
 
   try {
     await client.request(mutation, {

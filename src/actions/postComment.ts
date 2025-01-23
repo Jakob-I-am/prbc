@@ -2,9 +2,9 @@
 
 import { GraphQLClient, gql } from 'graphql-request';
 
-import { CommentBody } from '@/lib/ActionsInterfaces';
+import { Comment } from '@/lib/ActionsInterfaces';
 
-export async function postComment({ body }: CommentBody) {
+export async function postComment({ name, comment, slug }: Comment) {
   const client = new GraphQLClient(
     `${process.env.NEXT_PUBLIC_GRAPHCMS_ENDPOINT!}`,
     {
@@ -27,8 +27,6 @@ export async function postComment({ body }: CommentBody) {
       }
     }
   `;
-
-  const { name, comment, slug } = body;
 
   try {
     await client.request(mutation, { name, comment, slug });

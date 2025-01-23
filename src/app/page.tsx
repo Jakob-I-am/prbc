@@ -167,7 +167,7 @@ export default function Home() {
               </div>
             </div>
             <div
-              className='place-self-end'
+              className='md:place-self-end'
               id='contact'
             >
               <ContactForm />

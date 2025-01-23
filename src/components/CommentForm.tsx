@@ -1,7 +1,7 @@
 'use client';
 
+import { useEffect, useState, useTransition } from 'react';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useState, useTransition } from 'react';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 
@@ -15,19 +15,20 @@ import {
   FormDescription,
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
 import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
-import FormCardWrapper from '@/components/FormCardWrapper';
+import { Checkbox } from '@/components/ui/checkbox';
+import { Card, CardContent } from '@/components/ui/card';
 
 import { useToast } from '@/hooks/use-toast';
 
 import { commentFormSchema } from '@/schemas';
 
 import { postComment } from '@/actions/postComment';
-import { Card, CardContent } from './ui/card';
 
 export default function CommentForm({ slug }: { slug: string }) {
-  const [commentName, setCommentName] = useState<string>('');
+  const [rememberMe, setRememberMe] = useState(false);
   const [isPending, startTransition] = useTransition();
   const { toast } = useToast();
   const form = useForm<z.infer<typeof commentFormSchema>>({
@@ -39,17 +40,31 @@ export default function CommentForm({ slug }: { slug: string }) {
     },
   });
 
-  function onSubmit(values: z.infer<typeof commentFormSchema>) {
-    setCommentName(values.name);
-    const updatedValues = { body: { ...values } };
+  useEffect(() => {
+    const savedData = localStorage.getItem('commentFormName');
+    if (savedData) {
+      form.setValue('name', savedData);
+    }
+  }, [form.setValue]);
 
+  function onSubmit(values: z.infer<typeof commentFormSchema>) {
     startTransition(async () => {
-      const { success } = await postComment({ ...updatedValues });
+      const { success } = await postComment(values);
+
+      if (rememberMe) {
+        localStorage.setItem('commentFormName', values.name);
+      } else {
+        localStorage.removeItem('commentFormName');
+      }
 
       if (success) {
+        const savedName: string = localStorage.getItem('commentFormName')!;
+
         toast({
           title: 'Form Submitted',
-          description: `Thank you for commenting ${commentName}.`,
+          description: `Thank you for commenting${
+            savedName ? ` ${savedName}` : '.'
+          }.`,
           className: 'h-24 border-2 border-green-400 text-lg',
         });
       } else {
@@ -107,6 +122,14 @@ export default function CommentForm({ slug }: { slug: string }) {
                 </FormItem>
               )}
             />
+            <div className='flex items-center space-x-2'>
+              <Checkbox
+                id='rememberMe'
+                checked={rememberMe}
+                onCheckedChange={() => setRememberMe(!rememberMe)}
+              />
+              <Label htmlFor='rememberMe'>Remember Me</Label>
+            </div>
 
             <Button
               disabled={isPending}

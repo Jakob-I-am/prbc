@@ -22,11 +22,18 @@ export interface Post {
   createdAt: Date;
 }
 
-export interface Comment {
+export interface PostComment {
   id: string;
   name: string;
   comment: string;
+  slug: string;
   createdAt: Date;
+}
+
+export interface Comment {
+  name: string;
+  comment: string;
+  slug: string;
 }
 
 export interface PostData {
@@ -51,7 +58,7 @@ export interface PostData {
     categories: Category[];
     createdAt: Date;
   };
-  comments: Comment[];
+  comments: PostComment[];
 }
 
 export interface ContentEditor {
@@ -77,30 +84,18 @@ export interface PostSlide {
   createdAt: Date;
 }
 
-export interface CommentBody {
-  body: {
-    name: string;
-    comment: string;
-    slug: string;
-  };
+export interface Contact {
+  name: string;
+  phone: string;
+  message: string;
+  email: string;
+  messageStatus: string;
 }
 
-export interface ContactBody {
-  body: {
-    name: string;
-    phone: string;
-    message: string;
-    email: string;
-    messageStatus: string;
-  };
-}
-
-export interface NomineeBody {
-  body: {
-    name: string;
-    phone: string;
-    option: string[];
-  };
+export interface Nominee {
+  name: string;
+  phone: string;
+  option: string[];
 }
 
 export interface GalleryImage {

@@ -1,7 +1,7 @@
 'use client';
 
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useState, useTransition } from 'react';
+import { useEffect, useState, useTransition } from 'react';
 import { CalendarDaysIcon } from 'lucide-react';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
@@ -16,7 +16,9 @@ import {
   FormDescription,
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
 import { Button } from '@/components/ui/button';
+import { Checkbox } from '@/components/ui/checkbox';
 import { MultiSelect } from '@/components/MultiSelect';
 import FormCardWrapper from '@/components/FormCardWrapper';
 
@@ -26,8 +28,10 @@ import postNominee from '@/actions/postNominee';
 
 import { BowlNominationSchema } from '@/schemas';
 
+import { Nominee } from '@/lib/ActionsInterfaces';
+
 export default function BowlsNomsForm() {
-  const [nomineeName, setNomineeName] = useState<string>('');
+  const [rememberMe, setRememberMe] = useState(false);
   const [isPending, startTransition] = useTransition();
   const { toast } = useToast();
   const form = useForm<z.infer<typeof BowlNominationSchema>>({
@@ -38,6 +42,16 @@ export default function BowlsNomsForm() {
       option: [],
     },
   });
+
+  useEffect(() => {
+    const savedData: Nominee = JSON.parse(
+      localStorage.getItem('nominationsFormData')!
+    );
+    if (savedData) {
+      form.setValue('name', savedData.name);
+      form.setValue('phone', savedData.phone);
+    }
+  }, [form.setValue]);
 
   const selectOptions = [
     {
@@ -58,15 +72,30 @@ export default function BowlsNomsForm() {
   ];
 
   function onSubmit(values: z.infer<typeof BowlNominationSchema>) {
-    setNomineeName(values.name);
-    const updatedValues = { body: { ...values } };
-
     startTransition(async () => {
-      const { success } = await postNominee({ ...updatedValues });
+      const { success } = await postNominee(values);
+
+      if (rememberMe) {
+        localStorage.setItem(
+          'nominationsFormData',
+          JSON.stringify({
+            name: values.name,
+            phone: values.phone,
+          })
+        );
+      } else {
+        localStorage.removeItem('nominationsFormData');
+      }
 
       if (success) {
+        const savedData: Nominee = JSON.parse(
+          localStorage.getItem('nominationsFormData')!
+        );
+
         toast({
-          title: `Thank you for nominating ${nomineeName}.`,
+          title: `Thank you for nominating${
+            savedData ? ` ${savedData.name}.` : '.'
+          }`,
           description: 'Be there 15 minutes early, cant wait to see you there!',
           className: 'h-24 border-2 border-green-400 text-xl',
         });
@@ -85,7 +114,7 @@ export default function BowlsNomsForm() {
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
-          className='space-y-8'
+          className='space-y-6'
         >
           <FormField
             control={form.control}
@@ -140,6 +169,15 @@ export default function BowlsNomsForm() {
             )}
           />
           <FormDescription>Select one or more options</FormDescription>
+
+          <div className='flex items-center space-x-2'>
+            <Checkbox
+              id='rememberMe'
+              checked={rememberMe}
+              onCheckedChange={() => setRememberMe(!rememberMe)}
+            />
+            <Label htmlFor='rememberMe'>Remember Me</Label>
+          </div>
 
           <Button
             disabled={isPending}
