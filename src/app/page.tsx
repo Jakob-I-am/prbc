@@ -1,4 +1,4 @@
-import { ArrowRight, Mail, Phone, MapPin, Quote } from 'lucide-react';
+import { ArrowRight, Mail, Phone, MapPin, Quote, Info } from 'lucide-react';
 import { Suspense } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -6,7 +6,7 @@ import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import ContactForm from '@/components/ContactForm';
-import BowlsNomsForm from '@/components/BowlsNomsForm';
+// import BowlsNomsForm from '@/components/BowlsNomsForm';
 import PostCarousel from '@/components/PostCarousel';
 import ImageCarousel from '@/components/ImageCarousel';
 
@@ -176,7 +176,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className='container mx-auto py-16 px-4'>
+      {/* <section className='container mx-auto py-16 px-4'>
         <div className='grid lg:grid-cols-2 gap-8'>
           <div className='md:w-8/12'>
             <h2 className='text-3xl font-bold mb-6'>
@@ -185,11 +185,52 @@ export default function Home() {
             <BowlsNomsForm />
           </div>
           <div className='flex flex-col justify-center'>
-            <h3 className='text-2xl font-bold mb-4'>Social Bowls</h3>
-            <p className='space-y-3 text-lg text-gray-700'></p>
+            <Card className='p-6'>
+              <h3 className='text-xl font-bold mb-4 flex items-center'>
+                <Info className='mr-2 h-5 w-5' />
+                Important Information
+              </h3>
+              <div className='space-y-6'>
+                <div>
+                  <h4 className='font-semibold mb-2'>Arrival Time</h4>
+                  <p className='text-gray-600'>
+                    Please arrive 15 minutes before your session for
+                    registration and equipment setup.
+                  </p>
+                </div>
+                <div>
+                  <h4 className='font-semibold mb-2'>Equipment Rental</h4>
+                  <p className='text-gray-600'>
+                    Bowls are available for hire at $5 per session. Please
+                    indicate during registration if you need to hire equipment.
+                  </p>
+                </div>
+                <div>
+                  <h4 className='font-semibold mb-2'>Dress Code</h4>
+                  <p className='text-gray-600'>
+                    Neat casual dress is required. Flat-soled shoes or bare feet
+                    are mandatory on the green.
+                  </p>
+                </div>
+                <div>
+                  <h4 className='font-semibold mb-2'>Coaching</h4>
+                  <p className='text-gray-600'>
+                    Basic instruction is provided for beginners at the start of
+                    each session.
+                  </p>
+                </div>
+                <div>
+                  <h4 className='font-semibold mb-2'>Weather Policy</h4>
+                  <p className='text-gray-600'>
+                    Sessions may be cancelled due to adverse weather conditions.
+                    You will be notified by SMS/email.
+                  </p>
+                </div>
+              </div>
+            </Card>
           </div>
         </div>
-      </section>
+      </section> */}
 
       <div className='w-full'>
         <Suspense fallback={<p>Loading...</p>}>

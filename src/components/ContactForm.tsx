@@ -135,9 +135,9 @@ export default function ContactForm() {
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
-          className='space-y-2'
+          className='space-y-4'
         >
-          <div className='flex space-x-2'>
+          <div className='flex space-x-4'>
             <FormField
               control={form.control}
               name='firstName'
