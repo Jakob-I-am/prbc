@@ -14,6 +14,13 @@ import {
   FormMessage,
   FormDescription,
 } from '@/components/ui/form';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Button } from '@/components/ui/button';
@@ -28,6 +35,8 @@ import { postContactSchema } from '@/schemas';
 import { postContact } from '@/actions/postContact';
 
 import { Contact } from '@/lib/ActionsInterfaces';
+import { MultiSelect } from './MultiSelect';
+import { LoaderPinwheel, MailQuestion, Ticket, Users } from 'lucide-react';
 
 export default function ContactForm() {
   const [rememberMe, setRememberMe] = useState(false);
@@ -37,10 +46,12 @@ export default function ContactForm() {
     resolver: zodResolver(postContactSchema),
     defaultValues: {
       message: '',
-      name: '',
+      firstName: '',
+      lastName: '',
       phone: '',
       email: '',
       messageStatus: 'pending',
+      enquiry: [],
     },
   });
 
@@ -49,11 +60,35 @@ export default function ContactForm() {
       localStorage.getItem('contactFormData')!
     );
     if (savedData) {
-      form.setValue('name', savedData.name);
+      form.setValue('firstName', savedData.firstName);
+      form.setValue('lastName', savedData.lastName);
       form.setValue('phone', savedData.phone);
       form.setValue('email', savedData.email);
     }
   }, [form.setValue]);
+
+  const selectOptions = [
+    {
+      value: 'general',
+      label: 'General Enquiry',
+      icon: MailQuestion,
+    },
+    {
+      value: 'membership',
+      label: 'Membership',
+      icon: Users,
+    },
+    {
+      value: 'events and function',
+      label: 'Events & Functions',
+      icon: Ticket,
+    },
+    {
+      value: 'bowling',
+      label: 'Bowling Activities',
+      icon: LoaderPinwheel,
+    },
+  ];
 
   function onSubmit(values: z.infer<typeof postContactSchema>) {
     startTransition(async () => {
@@ -63,7 +98,8 @@ export default function ContactForm() {
         localStorage.setItem(
           'contactFormData',
           JSON.stringify({
-            name: values.name,
+            firstName: values.firstName,
+            lastName: values.lastName,
             phone: values.phone,
             email: values.email,
           })
@@ -80,7 +116,7 @@ export default function ContactForm() {
         toast({
           title: 'Form Submitted',
           description: `Thank you for contacting us${
-            savedData ? ` ${savedData.name}.` : '.'
+            savedData ? ` ${savedData.firstName} ${savedData.lastName}.` : '.'
           }`,
           className: 'h-24 border-2 border-green-400 text-lg',
         });
@@ -101,23 +137,42 @@ export default function ContactForm() {
           onSubmit={form.handleSubmit(onSubmit)}
           className='space-y-2'
         >
-          <FormField
-            control={form.control}
-            name='name'
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Name</FormLabel>
-                <FormControl>
-                  <Input
-                    placeholder='John Smith'
-                    type='text'
-                    {...field}
-                  />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
+          <div className='flex space-x-2'>
+            <FormField
+              control={form.control}
+              name='firstName'
+              render={({ field }) => (
+                <FormItem className='md:w-6/12'>
+                  <FormLabel>First Name</FormLabel>
+                  <FormControl>
+                    <Input
+                      placeholder='John'
+                      type='text'
+                      {...field}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name='lastName'
+              render={({ field }) => (
+                <FormItem className='md:w-6/12'>
+                  <FormLabel>Last Name</FormLabel>
+                  <FormControl>
+                    <Input
+                      placeholder='Smith'
+                      type='text'
+                      {...field}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+          </div>
           <FormField
             control={form.control}
             name='phone'
@@ -146,6 +201,27 @@ export default function ContactForm() {
                     placeholder='johnsmith@example.com'
                     type='email'
                     {...field}
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name='enquiry'
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Enquiry Type</FormLabel>
+                <FormControl>
+                  <MultiSelect
+                    options={selectOptions}
+                    onValueChange={field.onChange}
+                    defaultValue={field.value}
+                    placeholder='Select a Enquiry Type'
+                    variant='inverted'
+                    animation={2}
+                    maxCount={3}
                   />
                 </FormControl>
                 <FormMessage />

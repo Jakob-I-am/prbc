@@ -8,7 +8,7 @@ interface FormCardWrapperProps {
 
 export default function FormCardWrapper({ children }: FormCardWrapperProps) {
   return (
-    <Card className='md:w-[550px] md:h-[500px] shadow-md'>
+    <Card className=' shadow-md'>
       <CardContent className='mt-5'>{children}</CardContent>
     </Card>
   );

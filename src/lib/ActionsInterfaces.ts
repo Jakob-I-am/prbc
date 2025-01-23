@@ -85,11 +85,13 @@ export interface PostSlide {
 }
 
 export interface Contact {
-  name: string;
+  firstName: string;
+  lastName: string;
   phone: string;
   message: string;
   email: string;
   messageStatus: string;
+  enquiry: string[];
 }
 
 export interface Nominee {

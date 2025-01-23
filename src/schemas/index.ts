@@ -4,14 +4,18 @@ export const postContactSchema = z.object({
   message: z.string().min(1, {
     message: 'Message must be at least 1 characters.',
   }),
-  name: z.string().min(1, {
-    message: 'Please enter your full name',
+  firstName: z.string().min(1, {
+    message: 'Please enter your first name',
+  }),
+  lastName: z.string().min(1, {
+    message: 'Please enter your first name',
   }),
   phone: z.string().regex(/^[0-9]{8,10}$/, {
     message: 'Please enter a valid phone number',
   }),
   email: z.string().email({ message: 'Please enter a valid email' }),
   messageStatus: z.string(),
+  enquiry: z.array(z.string(), { message: 'Please select an option' }),
 });
 
 export const BowlNominationSchema = z.object({

@@ -167,7 +167,7 @@ export default function Home() {
               </div>
             </div>
             <div
-              className='md:place-self-end'
+              className='md:w-10/12 md:place-self-end'
               id='contact'
             >
               <ContactForm />
@@ -178,7 +178,7 @@ export default function Home() {
 
       <section className='container mx-auto py-16 px-4'>
         <div className='grid lg:grid-cols-2 gap-8'>
-          <div>
+          <div className='md:w-8/12'>
             <h2 className='text-3xl font-bold mb-6'>
               Social Bowls Nominations
             </h2>

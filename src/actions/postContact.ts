@@ -5,10 +5,12 @@ import { GraphQLClient, gql } from 'graphql-request';
 import { Contact } from '@/lib/ActionsInterfaces';
 
 export async function postContact({
-  name,
+  firstName,
+  lastName,
   phone,
-  message,
   email,
+  enquiry,
+  message,
   messageStatus,
 }: Contact) {
   const client = new GraphQLClient(
@@ -22,15 +24,19 @@ export async function postContact({
 
   const mutation = gql`
     mutation createContact(
-      $name: String!
+      $firstName: String!
+      $lastName: String!
       $phoneNumber: String!
       $message: String!
       $email: String!
       $messageStatus: MessageStatus!
+      $enquiry: [String!]!
     ) {
       createContact(
         data: {
-          name: $name
+          firstName: $firstName
+          lastName: $lastName
+          enquiry: $enquiry
           phoneNumber: $phoneNumber
           message: $message
           email: $email
@@ -44,10 +50,12 @@ export async function postContact({
 
   try {
     await client.request(mutation, {
-      name,
+      firstName,
+      lastName,
       phoneNumber: phone,
-      message: message,
       email,
+      enquiry,
+      message: message,
       messageStatus: messageStatus,
     });
     return { success: true };

@@ -64,7 +64,7 @@ export default function AboutPage() {
             </div>
             <div className='relative h-[400px] rounded-lg overflow-hidden'>
               <Image
-                src=''
+                src={bgImage}
                 alt='Historical club photo'
                 className='absolute inset-0 w-full h-full object-cover'
                 width={500}
@@ -167,7 +167,7 @@ export default function AboutPage() {
                     </li>
                   ))}
                 </ul>
-                <Button className='w-3/12 mt-6'>Join Now</Button>
+                <Button className='w-4/12 mt-6'>Join Now</Button>
               </Card>
             ))}
           </div>
@@ -208,15 +208,19 @@ export default function AboutPage() {
               <Button>View Menu</Button>
             </div>
             <div className='grid grid-cols-2 gap-4'>
-              <img
+              <Image
                 src='https://images.unsplash.com/photo-1544025162-d76694265947?q=80&w=1000&auto=format&fit=crop'
                 alt='Restaurant interior'
                 className='rounded-lg'
+                width={200}
+                height={200}
               />
-              <img
+              <Image
                 src='https://images.unsplash.com/photo-1559339352-11d035aa65de?q=80&w=1000&auto=format&fit=crop'
                 alt='Sample dish'
                 className='rounded-lg'
+                width={200}
+                height={200}
               />
             </div>
           </div>
@@ -272,118 +276,5 @@ export default function AboutPage() {
         </div>
       </section>
     </div>
-    // <div className='col-span-full'>
-    //   <Image
-    //     src={logo}
-    //     height={100}
-    //     width={100}
-    //     className='absolute top-5 left-5 size-14 z-10 md:hidden'
-    //     alt='PRBC logo'
-    //   />
-    //   <div className='space-y-5'>
-    //     <h1 className='text-3xl md:text-4xl text-destructive text-center uppercase pt-[4.25rem] font-bold'>
-    //       About Us
-    //     </h1>
-    //     <div className='text-2xl md:text-3xl text-center text-gray-700 px-4 py-6 md:py-10 md:w-10/12 mx-auto space-y-5'>
-    //       <iframe
-    //         width='70%'
-    //         height='80%'
-    //         src='https://www.youtube.com/embed/UbbFh6__AB4?si=yKivsb9G0c4f3Zzk'
-    //         title='YouTube video player'
-    //         frameBorder='0'
-    //         allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share'
-    //         referrerPolicy='strict-origin-when-cross-origin'
-    //         allowFullScreen
-    //         className='rounded-xl shadow-lg shadow-primary'
-    //       />
-    //       <p className=''>
-    //         The Parkes Railway Bowling Club is a vibrant hub of activity,
-    //         offering an array of entertainment and social opportunities for the
-    //         local community. Our doors are open from Wednesday through Sunday,
-    //         inviting you to enjoy a range of engaging experiences.
-    //       </p>
-    //       <p className=''>
-    //         Whether you&apos;re in the mood for a friendly game of barefoot
-    //         bowls or an evening filled with social events and functions, the
-    //         Parkes Railway Bowling Club has something to delight everyone. Our
-    //         Friday night raffle is a particular highlight, where you can have a
-    //         rollicking good time while vying for some truly fantastic prizes.
-    //         The action kicks off at 7 pm, so be sure to arrive early and secure
-    //         your spot.
-    //       </p>
-    //       <p className=''>
-    //         After an evening of fun and excitement, you can cap off your visit
-    //         by indulging in a delightful meal at our on-site restaurant. With
-    //         our happy hour starting at 5:00 pm, it&apos;s the perfect choice for
-    //         an enjoyable dinner out.
-    //       </p>
-    //       <p className=''>
-    //         The Parkes Railway Bowling Club is always buzzing with activity, so
-    //         be sure to check back regularly for the latest news, bowls draw
-    //         updates, and information on upcoming events. We&apos;re dedicated to
-    //         keeping the community engaged and entertained, so come join us and
-    //         be a part of the excitement!
-    //       </p>
-    //     </div>
-    //   </div>
-
-    //   <hr />
-
-    //   <div
-    //     className='md:flex md:flex-row md:items-center md:justify-evenly'
-    //     id='membership'
-    //   >
-    //     <p className='text-3xl md:text-4xl text-destructive pl-4 text-center font-bold'>
-    //       Opening Hours:
-    //     </p>
-    //     <ul className='text-2xl md:text-3xl text-secondary pl-4 space-y-2 block'>
-    //       <li>
-    //         <p>Monday:</p>
-    //         <p className='pl-4'>Closed</p>
-    //       </li>
-    //       <li>
-    //         <p>Tuesday:</p>
-    //         <p className='pl-4'>Closed</p>
-    //       </li>
-    //       <li>
-    //         <p>Wednesday:</p>
-    //         <p className='pl-4'>3:00pm - 7:00pm</p>
-    //       </li>
-    //       <li>
-    //         <p>Thursday:</p>
-    //         <p className='pl-4'>3:00pm - 7:00pm</p>
-    //       </li>
-    //     </ul>
-    //     <ul className='text-2xl md:text-3xl text-secondary pl-4 space-y-2 block'>
-    //       <li>
-    //         <p>Friday:</p>
-    //         <p className='pl-4'>11:30am - 12:00am</p>
-    //       </li>
-
-    //       <li>
-    //         <p>Saturday:</p>
-    //         <p className='pl-4'>10:00am - 12:00pm</p>
-    //       </li>
-    //       <li>
-    //         <p>Sunday:</p>
-    //         <p className='pl-4'>10:00am - 12:00pm</p>
-    //       </li>
-    //     </ul>
-    //   </div>
-
-    //   <div
-    //     className='w-11/12 md:w-9/12 mx-auto pb-5'
-    //     id='dining'
-    //   >
-    //     <div className=''>
-    //       <iframe
-    //         width='100%'
-    //         id='gmap_canvas'
-    //         src='https://maps.google.com/maps?q=parkes%20railway%20bowling%20club&t=&z=16&ie=UTF8&iwloc=&output=embed'
-    //         className='p-2 h-[500px] md:h-[600px] rounded-[2rem]'
-    //       ></iframe>
-    //     </div>
-    //   </div>
-    // </div>
   );
 }
