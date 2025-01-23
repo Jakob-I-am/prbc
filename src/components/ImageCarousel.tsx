@@ -51,8 +51,8 @@ export default function ImageCarousel({
                         <Image
                           src={image.image.url}
                           alt={image.imageName}
-                          width={200}
-                          height={200}
+                          width={image.image.width}
+                          height={image.image.height}
                           className='h-full w-full object-center object-cover rounded'
                         />
                         <div className='absolute inset-0 bg-black bg-opacity-10 rounded' />

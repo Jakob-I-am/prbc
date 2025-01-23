@@ -18,6 +18,8 @@ export async function getGalleryImages() {
         description
         image {
           url
+          width
+          height
         }
       }
     }

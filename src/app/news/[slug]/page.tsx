@@ -1,9 +1,7 @@
 import { CalendarDays, MessageSquare } from 'lucide-react';
 import Image from 'next/image';
 
-import { Input } from '@/components/ui/input';
-import { Button } from '@/components/ui/button';
-import { Textarea } from '@/components/ui/textarea';
+import CommentForm from '@/components/CommentForm';
 import { RichTextRenderer } from '@/components/RichTextRenderer';
 
 import { getPostDetails } from '@/actions/blogPostActions';
@@ -15,13 +13,11 @@ export default async function NewsDetailPage({
 }) {
   const slug = (await params).slug;
 
-  const post = await getPostDetails(slug);
-
-  console.log(post);
+  const { post, comments } = await getPostDetails(slug);
 
   return (
     <div className='w-full overflow-x-hidden'>
-      <section className='relative h-[50vh] w-full overflow-hidden'>
+      <section className='relative h-[30vh] w-full overflow-hidden'>
         <Image
           src={post.featuredImg.url}
           alt={post.title}
@@ -40,34 +36,34 @@ export default async function NewsDetailPage({
               {new Date(post.createdAt).toLocaleDateString()}
             </div>
             <span>•</span>
-            <span>By {post.id}</span>
+            <span>By {post.createdBy.name}</span>
           </div>
         </div>
       </section>
 
-      <section className='py-16 bg-white'>
-        <div className='container mx-auto px-4'>
-          <div className='max-w-3xl mx-auto'>
-            <article className='prose prose-lg max-w-none'>
-              <RichTextRenderer content={post.content} />
-            </article>
-          </div>
-        </div>
-      </section>
-
-      {post.comments.length && (
-        <section className='py-16 bg-gray-50'>
+      <div className='grid grid-cols-1 md:grid-cols-3'>
+        <section className='py-16 bg-white col-span-2'>
           <div className='container mx-auto px-4'>
             <div className='max-w-3xl mx-auto'>
+              <article className='prose prose-lg max-w-none'>
+                <RichTextRenderer content={post.content.json} />
+              </article>
+            </div>
+          </div>
+        </section>
+
+        <section className='py-16 bg-gray-50'>
+          <div className='container mx-auto px-4'>
+            <div className='max-w-xl mx-auto'>
               <div className='flex items-center gap-3 mb-8'>
                 <MessageSquare className='h-6 w-6 text-gray-600' />
                 <h2 className='text-2xl font-bold'>
-                  Comments ({post.comments.length})
+                  Comments ({comments.length})
                 </h2>
               </div>
 
               <div className='space-y-6 mb-12'>
-                {post.comments.map((comment) => (
+                {comments.map((comment) => (
                   <div
                     key={comment.id}
                     className='bg-white p-6 rounded-lg shadow-sm'
@@ -85,25 +81,12 @@ export default async function NewsDetailPage({
 
               <div className='bg-white p-6 rounded-lg shadow-sm'>
                 <h3 className='text-xl font-semibold mb-6'>Leave a Comment</h3>
-                <form className='space-y-4'>
-                  <div className='grid grid-cols-1 md:grid-cols-2 gap-4'>
-                    <Input placeholder='Name' />
-                    <Input
-                      type='email'
-                      placeholder='Email'
-                    />
-                  </div>
-                  <Textarea
-                    placeholder='Your comment'
-                    className='min-h-[150px]'
-                  />
-                  <Button className='w-full md:w-auto'>Post Comment</Button>
-                </form>
+                <CommentForm slug={post.slug} />
               </div>
             </div>
           </div>
         </section>
-      )}
+      </div>
     </div>
   );
 }

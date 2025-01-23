@@ -23,3 +23,9 @@ export const BowlNominationSchema = z.object({
   }),
   option: z.array(z.string(), { message: 'Please select an option' }),
 });
+
+export const commentFormSchema = z.object({
+  name: z.string().min(1, { message: 'Please enter your name' }),
+  comment: z.string().min(1, { message: 'Please leave a comment' }),
+  slug: z.string(),
+});

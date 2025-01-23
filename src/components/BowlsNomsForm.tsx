@@ -58,8 +58,8 @@ export default function BowlsNomsForm() {
   ];
 
   function onSubmit(values: z.infer<typeof BowlNominationSchema>) {
+    setNomineeName(values.name);
     const updatedValues = { body: { ...values } };
-    setNomineeName(updatedValues.body.name);
 
     startTransition(async () => {
       const { success } = await postNominee({ ...updatedValues });

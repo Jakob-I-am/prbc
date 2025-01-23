@@ -88,27 +88,36 @@ export async function getPostDetails(slug: string) {
         postType
         id
         featuredPost
+        createdBy {
+          name
+        }
         featuredImg {
           url
+          width
+          height
         }
         images {
           url
+          width
+          height
         }
         content {
           json
         }
-        comment(last: 5) {
-          id
-          comment
-          createdAt
-          name
-        }
+      }
+      comments(where: { post: { slug: $slug } }) {
+        id
+        name
+        createdAt
+        comment
       }
     }
   `;
 
-  const { post }: PostData = await request(graphqlAPI, query, { slug });
-  return post;
+  const { post, comments }: PostData = await request(graphqlAPI, query, {
+    slug,
+  });
+  return { post, comments };
 }
 
 export async function getBowlsPosts() {

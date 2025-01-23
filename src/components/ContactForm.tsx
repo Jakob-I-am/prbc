@@ -41,8 +41,8 @@ export default function ContactForm() {
   });
 
   function onSubmit(values: z.infer<typeof postContactSchema>) {
+    setContactName(values.name);
     const updatedValues = { body: { ...values } };
-    setContactName(updatedValues.body.name);
 
     startTransition(async () => {
       const { success } = await postContact({ ...updatedValues });

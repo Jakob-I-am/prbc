@@ -1,3 +1,5 @@
+import { RichTextContent } from '@graphcms/rich-text-types';
+
 export interface Post {
   postType: string[];
   id: string;
@@ -5,21 +7,24 @@ export interface Post {
   featuredImg: {
     url: string;
   };
+  createdBy: {
+    name: string;
+  };
   excerpt: string;
-  content: any;
+  content: {
+    json: RichTextContent;
+  };
   featuredPost: boolean;
   slug: string;
-  images?: any;
+  images?: string[];
   contentEditor: ContentEditor;
   categories: Category[];
-  comment: Comment[];
   createdAt: Date;
 }
 
 export interface Comment {
   id: string;
   name: string;
-  email: string;
   comment: string;
   createdAt: Date;
 }
@@ -32,16 +37,21 @@ export interface PostData {
     featuredImg: {
       url: string;
     };
+    createdBy: {
+      name: string;
+    };
     excerpt: string;
-    content: any;
+    content: {
+      json: RichTextContent;
+    };
     featuredPost: boolean;
     slug: string;
-    images?: any;
+    images?: string[];
     contentEditor: ContentEditor;
     categories: Category[];
-    comments: Comment[];
     createdAt: Date;
   };
+  comments: Comment[];
 }
 
 export interface ContentEditor {
@@ -98,6 +108,8 @@ export interface GalleryImage {
   description: string;
   image: {
     url: string;
+    width: number;
+    height: number;
   };
 }
 

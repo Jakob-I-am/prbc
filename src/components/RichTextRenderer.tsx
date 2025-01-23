@@ -1,5 +1,7 @@
 import React from 'react';
 import { RichText } from '@graphcms/rich-text-react-renderer';
+import {} from '@graphcms/rich-text-types';
+
 import Link from 'next/link';
 import Image from 'next/image';
 interface RichTextRendererProps {
@@ -22,8 +24,16 @@ export function RichTextRenderer({ content }: RichTextRendererProps) {
         h4: ({ children }) => (
           <h4 className='text-xl font-bold mb-3 mt-5'>{children}</h4>
         ),
+        h5: ({ children }) => (
+          <h5 className='text-lg font-bold mb-2 mt-4'>{children}</h5>
+        ),
+        h6: ({ children }) => (
+          <h6 className='text-lg font-bold mb-1 mt-3'>{children}</h6>
+        ),
         p: ({ children }) => (
-          <p className='text-gray-700 mb-4 leading-relaxed'>{children}</p>
+          <p className='text-lg text-gray-700 mb-2 leading-relaxed'>
+            {children}
+          </p>
         ),
         ul: ({ children }) => (
           <ul className='list-disc list-inside mb-4 space-y-2'>{children}</ul>
@@ -47,12 +57,13 @@ export function RichTextRenderer({ content }: RichTextRendererProps) {
             {children}
           </Link>
         ),
-        img: ({ src }) => (
+        img: ({ src, width, height }) => (
           <Image
             src={src!}
-            width={500}
-            height={500}
+            width={width}
+            height={height}
             alt='post image'
+            className='my-5 object-cover aspect-auto rounded-lg'
           />
         ),
       }}
