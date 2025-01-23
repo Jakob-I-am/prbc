@@ -20,7 +20,7 @@ export default async function NewsPage() {
           alt='Bowling club interior'
           className='absolute inset-0 w-full h-full object-cover'
         />
-        <div className='absolute inset-0 bg-black/50' />
+        <div className='absolute inset-0 bg-black/60' />
         <div className='relative z-10 flex flex-col items-center justify-center h-full text-white px-4'>
           <h1 className='text-4xl md:text-6xl font-bold text-center mb-4'>
             Latest News & Updates
