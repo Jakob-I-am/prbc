@@ -1,10 +1,16 @@
 import { Clock, Coffee, MapPin, Users } from 'lucide-react';
 import Image from 'next/image';
+import Link from 'next/link';
 
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 
 import bgImage from '../../../public/bgImage.jpg';
+import birdsEye from '../../../public/birds-eye.jpg';
+import meal1 from '../../../public/meal1.png';
+import meal2 from '../../../public/meal2.png';
+import meal3 from '../../../public/meal3.png';
+import meal4 from '../../../public/meal4.png';
 
 export default function AboutPage() {
   return (
@@ -27,7 +33,7 @@ export default function AboutPage() {
         <div className='container mx-auto px-4'>
           <div className='grid lg:grid-cols-2 gap-12 items-center'>
             <div>
-              <h2 className='text-2xl md:text-3xl font-bold mb-6'>
+              <h2 className='text-4xl md:text-3xl font-bold mb-6'>
                 Parkes Railway Bowling Club
               </h2>
               <div className='space-y-4 text-gray-700 text-lg'>
@@ -64,9 +70,9 @@ export default function AboutPage() {
             </div>
             <div className='relative h-[400px] rounded-lg overflow-hidden'>
               <Image
-                src={bgImage}
+                src={birdsEye}
                 alt='Historical club photo'
-                className='absolute inset-0 w-full h-full object-cover'
+                className='absolute inset-0 w-full h-full object-cover object-left'
                 width={500}
                 height={500}
               />
@@ -77,13 +83,13 @@ export default function AboutPage() {
 
       <section className='py-16 bg-gray-50'>
         <div className='container mx-auto px-4'>
-          <div className='max-w-3xl mx-auto'>
+          <div className='max-w-4xl mx-auto'>
             <div className='flex items-center justify-center mb-8'>
               <Clock className='w-8 h-8 mr-3 text-gray-600' />
               <h2 className='text-3xl font-bold'>Operating Hours</h2>
             </div>
             <div className='grid grid-cols-1 md:grid-cols-2 gap-8'>
-              <Card className='p-6'>
+              <Card className='p-4'>
                 <h3 className='text-xl font-semibold mb-4'>Club Hours</h3>
                 <div className='space-y-2'>
                   <div className='flex justify-between'>
@@ -152,7 +158,7 @@ export default function AboutPage() {
             ].map((tier, index) => (
               <Card
                 key={index}
-                className='p-6 w-8/12 place-self-center'
+                className='p-6 w-11/12 md:w-8/12 place-self-center'
               >
                 <h3 className='text-xl font-semibold mb-2'>{tier.title}</h3>
                 <p className='text-3xl font-bold mb-4'>{tier.price}</p>
@@ -167,7 +173,9 @@ export default function AboutPage() {
                     </li>
                   ))}
                 </ul>
-                <Button className='w-4/12 mt-6'>Join Now</Button>
+                <Link href='/contact-form'>
+                  <Button className='w-4/12 mt-6'>Enquire Now</Button>
+                </Link>
               </Card>
             ))}
           </div>
@@ -197,28 +205,43 @@ export default function AboutPage() {
                 <div className='grid grid-cols-2 gap-4'>
                   <div>
                     <p className='font-medium'>Lunch</p>
-                    <p className='text-gray-600'>Wed-Sun: 12:00 PM - 2:30 PM</p>
+                    <p className='text-gray-600'>Wed-Sun: </p>
+                    <p className='text-gray-600'>12:00 PM - 2:30 PM</p>
                   </div>
                   <div>
                     <p className='font-medium'>Dinner</p>
-                    <p className='text-gray-600'>Wed-Sat: 6:00 PM - 9:00 PM</p>
+                    <p className='text-gray-600'>Wed-Sat: </p>
+                    <p className='text-gray-600'>6:00 PM - 9:00 PM</p>
                   </div>
                 </div>
               </div>
-              <Button>View Menu</Button>
             </div>
             <div className='grid grid-cols-2 gap-4'>
               <Image
-                src='https://images.unsplash.com/photo-1544025162-d76694265947?q=80&w=1000&auto=format&fit=crop'
+                src={meal1}
                 alt='Restaurant interior'
-                className='rounded-lg'
+                className='rounded-lg md:h-44 md:w-72'
                 width={200}
                 height={200}
               />
               <Image
-                src='https://images.unsplash.com/photo-1559339352-11d035aa65de?q=80&w=1000&auto=format&fit=crop'
+                src={meal2}
+                alt='Restaurant interior'
+                className='rounded-lg md:h-44 md:w-72'
+                width={200}
+                height={200}
+              />
+              <Image
+                src={meal3}
+                alt='Restaurant interior'
+                className='rounded-lg md:h-44 md:w-72'
+                width={200}
+                height={200}
+              />
+              <Image
+                src={meal4}
                 alt='Sample dish'
-                className='rounded-lg'
+                className='rounded-lg md:h-44 md:w-72'
                 width={200}
                 height={200}
               />

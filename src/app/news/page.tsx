@@ -69,15 +69,6 @@ export default async function NewsPage() {
               </Card>
             ))}
           </div>
-
-          <div className='flex justify-center mt-12'>
-            <Button
-              variant='outline'
-              size='lg'
-            >
-              Load More Posts
-            </Button>
-          </div>
         </div>
       </section>
     </div>

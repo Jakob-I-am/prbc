@@ -14,13 +14,6 @@ import {
   FormMessage,
   FormDescription,
 } from '@/components/ui/form';
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '@/components/ui/select';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Button } from '@/components/ui/button';
@@ -36,7 +29,13 @@ import { postContact } from '@/actions/postContact';
 
 import { Contact } from '@/lib/ActionsInterfaces';
 import { MultiSelect } from './MultiSelect';
-import { LoaderPinwheel, MailQuestion, Ticket, Users } from 'lucide-react';
+import {
+  Guitar,
+  LoaderPinwheel,
+  MailQuestion,
+  Ticket,
+  Users,
+} from 'lucide-react';
 
 export default function ContactForm() {
   const [rememberMe, setRememberMe] = useState(false);
@@ -87,6 +86,11 @@ export default function ContactForm() {
       value: 'bowling',
       label: 'Bowling Activities',
       icon: LoaderPinwheel,
+    },
+    {
+      value: 'elvis',
+      label: 'Elvis Festival',
+      icon: Guitar,
     },
   ];
 

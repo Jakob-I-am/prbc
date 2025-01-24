@@ -1,4 +1,6 @@
 import type { Metadata } from 'next';
+import { SpeedInsights } from '@vercel/speed-insights/next';
+
 import { Rubik, Inter } from 'next/font/google';
 import './globals.css';
 
@@ -30,6 +32,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang='en'>
+      <SpeedInsights />
       <body className='bg-secondary'>
         <div className={`${rubikSans.className} antialiased`}>
           <Navbar />

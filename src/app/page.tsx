@@ -1,4 +1,4 @@
-import { ArrowRight, Mail, Phone, MapPin, Quote, Info } from 'lucide-react';
+import { ArrowRight, Mail, Phone, MapPin, Quote } from 'lucide-react';
 import { Suspense } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -6,17 +6,17 @@ import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import ContactForm from '@/components/ContactForm';
-// import BowlsNomsForm from '@/components/BowlsNomsForm';
 import PostCarousel from '@/components/PostCarousel';
 import ImageCarousel from '@/components/ImageCarousel';
 
-import event from '../../public/event.jpg';
+import event from '../../public/event.png';
 import membership from '../../public/membership.jpeg';
-import bowls from '../../public/bowls.jpeg';
+import bowls from '../../public/bowls.png';
 import dining from '../../public/dining.jpg';
 
 import { getPostSlides } from '@/actions/blogPostActions';
 import { getGalleryImages } from '@/actions/imageActions';
+import { VideoComponent } from '../components/VideoComponent';
 
 export default function Home() {
   const posts = getPostSlides();
@@ -24,18 +24,24 @@ export default function Home() {
 
   return (
     <div className='w-full overflow-x-hidden'>
-      <section className='relative h-[74vh] md:h-[70vh] w-full overflow-hidden'>
-        <img
-          src='https://images.unsplash.com/photo-1599013835026-83ff15455779?q=80&w=2000&auto=format&fit=crop'
-          alt='Bowling club panorama'
-          className='absolute inset-0 w-full h-full object-cover'
-        />
-        <div className='absolute inset-0 bg-black/50' />
-        <div className='relative z-10 flex flex-col items-center justify-center h-full text-white px-4'>
-          <h1 className='text-4xl md:text-6xl font-bold text-center mb-4'>
+      <section className='hidden md:block h-[77vh] w-full overflow-hidden'>
+        <Suspense fallback={<p>Loading video...</p>}>
+          <VideoComponent fileName='PRBC-landscape.mp4' />
+        </Suspense>
+      </section>
+
+      <section className='md:hidden h-[82vh] w-full overflow-hidden'>
+        <Suspense fallback={<p>Loading video...</p>}>
+          <VideoComponent fileName='PRBC-portrait.mp4' />
+        </Suspense>
+      </section>
+
+      <section className='bg-white h-[18vh] md:h-[15vh] w-full overflow-hidden pt-4'>
+        <div className='flex flex-col items-center justify-center h-full text-primary p-4'>
+          <h1 className='text-4xl md:text-6xl font-bold text-center my-4'>
             Parkes Railway Bowling Club
           </h1>
-          <p className='text-2xl md:text-4xl mb-8'>
+          <p className='text-xl md:text-4xl mb-8'>
             <Quote
               className='inline transform rotate-180 -translate-y-3 h-4 w-4 md:w-7 md:h-7'
               color='#ef4444'
@@ -48,30 +54,8 @@ export default function Home() {
               fill='#ef4444'
             />
           </p>
-          <div className='md:hidden flex gap-4'>
-            <Link href='/about'>
-              <Button
-                size='lg'
-                variant='default'
-                className='hover:bg-secondary hover:text-primary hover:scale-[1.0125] hover:border hover:border-primary'
-              >
-                About Us
-              </Button>
-            </Link>
-            <Link href='#contact'>
-              <Button
-                size='lg'
-                variant='outline'
-                className='hover:bg-primary hover:text-secondary text-primary hover:scale-[1.0125] hover:border-none'
-              >
-                Contact Us
-              </Button>
-            </Link>
-          </div>
         </div>
       </section>
-
-      <section className='bg-white h-[26vh] md:h-[23vh] w-full overflow-hidden'></section>
 
       <section className='container mx-auto py-16 px-4'>
         <div className='grid lg:grid-cols-2 gap-8'>
@@ -107,7 +91,7 @@ export default function Home() {
                   alt={service.title}
                   width={300}
                   height={300}
-                  className='w-full h-32 object-cover'
+                  className='w-full h-36 object-cover'
                 />
                 <div className='p-4'>
                   <h3 className='font-semibold mb-2'>{service.title}</h3>
@@ -131,7 +115,9 @@ export default function Home() {
               the local community. Our doors are open from Wednesday through
               Sunday, inviting you to enjoy a range of engaging experiences.
             </p>
-            <Button className='self-start'>About us</Button>
+            <Link href='/about'>
+              <Button className='self-start'>About us</Button>
+            </Link>
           </div>
         </div>
       </section>

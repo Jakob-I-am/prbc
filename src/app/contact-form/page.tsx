@@ -39,7 +39,6 @@ export default function ContactPage() {
         </div>
       </section>
 
-      {/* Contact Information Cards */}
       <section className='py-16 bg-white'>
         <div className='container mx-auto px-4'>
           <div className='grid md:grid-cols-3 gap-8'>
@@ -76,7 +75,7 @@ export default function ContactPage() {
           </div>
         </div>
       </section>
-      {/* Contact Form Section */}
+
       <section className='py-16 bg-gray-50'>
         <div className='container mx-auto px-4'>
           <div className='max-w-3xl mx-auto'>
@@ -121,7 +120,7 @@ export default function ContactPage() {
               </div>
               <div className='h-[400px] rounded-lg overflow-hidden'>
                 <iframe
-                  src='https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3361.589067337067!2d148.17570661524786!3d-33.13774998086893!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6b11e45b57e71943%3A0x8f2403a4fb3574a0!2sHooley%20St%2C%20Parkes%20NSW%202870!5e0!3m2!1sen!2sau!4v1645123456789!5m2!1sen!2sau'
+                  src='https://maps.google.com/maps?q=parkes%20railway%20bowling%20club&t=&z=16&ie=UTF8&iwloc=&output=embed'
                   width='100%'
                   height='100%'
                   style={{

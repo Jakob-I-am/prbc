@@ -1,4 +1,10 @@
-import { ArrowRight, CalendarDays } from 'lucide-react';
+import {
+  ArrowRight,
+  Backpack,
+  CalendarDays,
+  Info,
+  LoaderPinwheel,
+} from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 
@@ -23,17 +29,85 @@ export default async function BowlsPage() {
         <div className='absolute inset-0 bg-black/60' />
         <div className='relative z-10 flex flex-col items-center justify-center h-full text-white px-4'>
           <h1 className='text-4xl md:text-6xl font-bold text-center mb-4'>
-            Bowls News
+            Bowls
           </h1>
           <p className='text-xl md:text-2xl text-center'>
-            Stay up to date with everything happening on the greens at the
-            Parkes Railway Bowling Club
+            Get all the information and Stay up to date with everything
+            happening on the greens at the Parkes Railway Bowling Club
           </p>
         </div>
       </section>
 
       <section className='py-16 bg-white'>
         <div className='container mx-auto px-4'>
+          <div className='grid md:grid-cols-3 gap-8'>
+            <Card className='p-6'>
+              <h3 className='text-xl font-bold mb-4 flex items-center'>
+                <LoaderPinwheel className='mr-2 h-5 w-5' />
+                Social Bowls Sessions
+              </h3>
+              <div className='space-y-4'>
+                <p className='text-gray-600'>Each session includes:</p>
+                <ul className='space-y-2 text-gray-600'>
+                  <li>• 15 minutes pre-game briefing</li>
+                  <li>• 2 hours of social bowling</li>
+                  <li>• Basic instruction for beginners</li>
+                  <li>• Post-game refreshments available at the club</li>
+                </ul>
+              </div>
+            </Card>
+
+            <Card className='p-6'>
+              <h3 className='text-xl font-bold mb-4 flex items-center'>
+                <Info className='mr-2 h-5 w-5' />
+                Session Information
+              </h3>
+              <div className='space-y-4'>
+                <p className='text-gray-600'>Each session includes:</p>
+                <ul className='space-y-2 text-gray-600'>
+                  <li>• 15 minutes pre-game briefing</li>
+                  <li>• 2 hours of social bowling</li>
+                  <li>• Basic instruction for beginners</li>
+                  <li>• Post-game refreshments available at the club</li>
+                </ul>
+              </div>
+            </Card>
+
+            <Card className='p-6'>
+              <h3 className='text-xl font-bold mb-4 flex items-center'>
+                <Backpack className='mr-2 h-5 w-5' />
+                What to Bring
+              </h3>
+              <ul className='space-y-3'>
+                <li className='flex items-start'>
+                  <span className='text-green-500 mr-2'>✓</span>
+                  <span>Flat-soled shoes or bare feet (required)</span>
+                </li>
+                <li className='flex items-start'>
+                  <span className='text-green-500 mr-2'>✓</span>
+                  <span>Comfortable, loose-fitting clothing</span>
+                </li>
+                <li className='flex items-start'>
+                  <span className='text-green-500 mr-2'>✓</span>
+                  <span>Hat and sunscreen</span>
+                </li>
+                <li className='flex items-start'>
+                  <span className='text-green-500 mr-2'>✓</span>
+                  <span>Water bottle</span>
+                </li>
+                <li className='flex items-start'>
+                  <span className='text-green-500 mr-2'>✓</span>
+                  <span>Your own bowls (if you have them)</span>
+                </li>
+              </ul>
+            </Card>
+          </div>
+        </div>
+      </section>
+
+      <section className='py-16 bg-white'>
+        <div className='container mx-auto px-4'>
+          <h2 className='text-3xl font-bold pb-8'>Bowls News</h2>
           <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8'>
             {bowlsPosts.map((post, index) => (
               <Card
@@ -68,15 +142,6 @@ export default async function BowlsPage() {
                 </div>
               </Card>
             ))}
-          </div>
-
-          <div className='flex justify-center mt-12'>
-            <Button
-              variant='outline'
-              size='lg'
-            >
-              Load More Posts
-            </Button>
           </div>
         </div>
       </section>

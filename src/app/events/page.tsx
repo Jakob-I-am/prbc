@@ -1,4 +1,4 @@
-import { ArrowRight, CalendarDays } from 'lucide-react';
+import { ArrowRight, CalendarDays, Clock, Mail, Phone } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 
@@ -27,8 +27,45 @@ export default async function page() {
           </h1>
           <p className='text-xl md:text-2xl text-center'>
             Stay up to date with every social event happening at the Parkes
-            Railwa Bowling Club
+            Railway Bowling Club
           </p>
+        </div>
+      </section>
+
+      <section className='py-16 bg-white'>
+        <div className='container mx-auto px-4'>
+          <div className='grid md:grid-cols-3 gap-8'>
+            <Card className='p-6 flex flex-col items-center text-center'>
+              <Phone className='h-10 w-10 text-gray-600 mb-4' />
+              <h2 className='text-xl font-semibold mb-2'>Phone</h2>
+              <p className='text-gray-600 mb-4'>Available 7 days a week</p>
+              <Link
+                href='tel:(02)68622772'
+                className='font-medium'
+              >
+                (02) 6862 2772
+              </Link>
+            </Card>
+            <Card className='p-6 flex flex-col items-center text-center'>
+              <Mail className='h-10 w-10 text-gray-600 mb-4' />
+              <h2 className='text-xl font-semibold mb-2'>Email</h2>
+              <p className='text-gray-600 mb-4'>
+                We'll respond within 24 hours
+              </p>
+              <Link
+                href='mailto:railwaydiggersbc@bigpond.com'
+                className='font-medium'
+              >
+                railwaydiggersbc@bigpond.com
+              </Link>
+            </Card>
+            <Card className='p-6 flex flex-col items-center text-center'>
+              <Clock className='h-10 w-10 text-gray-600 mb-4' />
+              <h2 className='text-xl font-semibold mb-2'>Opening Hours</h2>
+              <p className='text-gray-600 mb-2'>Wed-Thu: 10:00 AM - 10:00 PM</p>
+              <p className='text-gray-600'>Fri-Sat: 10:00 AM - 12:00 AM</p>
+            </Card>
+          </div>
         </div>
       </section>
 
@@ -68,15 +105,6 @@ export default async function page() {
                 </div>
               </Card>
             ))}
-          </div>
-
-          <div className='flex justify-center mt-12'>
-            <Button
-              variant='outline'
-              size='lg'
-            >
-              Load More Posts
-            </Button>
           </div>
         </div>
       </section>

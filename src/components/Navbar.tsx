@@ -1,18 +1,10 @@
 'use client';
 
-import { ChevronDown, Menu, X } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
 import { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu';
 import { Button } from '@/components/ui/button';
 
 import logo from '../../public/logo.png';
@@ -29,7 +21,7 @@ const links: Option[] = [
   },
   {
     name: 'About',
-    slug: '',
+    slug: '/about',
   },
   {
     name: 'News',
@@ -82,41 +74,15 @@ export default function Navbar() {
 
           {/* Navigation Links - Desktop */}
           <div className='hidden md:flex items-center space-x-8'>
-            {links.map((link) => {
-              return link.name == 'About' ? (
-                <DropdownMenu key='1'>
-                  <DropdownMenuTrigger className='text-gray-800 hover:text-destructive px-3 py-2 rounded-md text-lg font-medium uppercase flex items-center'>
-                    About{' '}
-                    <ChevronDown
-                      className='pl-2'
-                      size={35}
-                    />
-                  </DropdownMenuTrigger>
-                  <DropdownMenuContent className='-mt-3'>
-                    <DropdownMenuItem className='text-base'>
-                      <Link href='/about'>About Us</Link>
-                    </DropdownMenuItem>
-                    <DropdownMenuItem className='text-base'>
-                      <Link href='/about#membership'>Membership</Link>
-                    </DropdownMenuItem>
-                    <DropdownMenuItem className='text-base'>
-                      <Link href='/about#dining'>Bistro</Link>
-                    </DropdownMenuItem>
-                    <DropdownMenuItem className='text-base'>
-                      <Link href='/about#venue'>Venue</Link>
-                    </DropdownMenuItem>
-                  </DropdownMenuContent>
-                </DropdownMenu>
-              ) : (
-                <Link
-                  key={link.name}
-                  className='text-gray-800 hover:text-destructive px-3 py-2 rounded-md text-lg font-medium uppercase'
-                  href={link.slug}
-                >
-                  {link.name}
-                </Link>
-              );
-            })}
+            {links.map((link) => (
+              <Link
+                key={link.name}
+                className='text-gray-800 hover:text-destructive px-3 py-2 rounded-md text-lg font-medium uppercase'
+                href={link.slug}
+              >
+                {link.name}
+              </Link>
+            ))}
           </div>
 
           <div className='hidden md:flex items-center space-x-8'>
@@ -147,12 +113,12 @@ export default function Navbar() {
               <div className='h-9 w-9 flex items-center justify-center rounded'>
                 {isOpen ? (
                   <X
-                    size={30}
+                    size={36}
                     stroke='#171717'
                   />
                 ) : (
                   <Menu
-                    size={30}
+                    size={36}
                     stroke='#f5f5f5'
                   />
                 )}
@@ -169,62 +135,16 @@ export default function Navbar() {
         }`}
       >
         <div className='pt-14 pb-3 flex flex-col items-start'>
-          {links.map((link) => {
-            return link.name == 'About' ? (
-              <DropdownMenu key='1'>
-                <DropdownMenuTrigger className='text-gray-800 hover:text-destructive px-3 py-2 rounded-md text-lg font-medium uppercase flex items-center'>
-                  About{' '}
-                  <ChevronDown
-                    className='pl-2'
-                    size={35}
-                  />
-                </DropdownMenuTrigger>
-                <DropdownMenuContent className='-mt-3'>
-                  <DropdownMenuItem className='text-base'>
-                    <Link
-                      onClick={() => setIsOpen(!isOpen)}
-                      href='/about'
-                    >
-                      About Us
-                    </Link>
-                  </DropdownMenuItem>
-                  <DropdownMenuItem className='text-base'>
-                    <Link
-                      onClick={() => setIsOpen(!isOpen)}
-                      href='/about#membership'
-                    >
-                      Membership
-                    </Link>
-                  </DropdownMenuItem>
-                  <DropdownMenuItem className='text-base'>
-                    <Link
-                      onClick={() => setIsOpen(!isOpen)}
-                      href='/about#dining'
-                    >
-                      Bistro
-                    </Link>
-                  </DropdownMenuItem>
-                  <DropdownMenuItem className='text-base'>
-                    <Link
-                      onClick={() => setIsOpen(!isOpen)}
-                      href='/about#venue'
-                    >
-                      Venue
-                    </Link>
-                  </DropdownMenuItem>
-                </DropdownMenuContent>
-              </DropdownMenu>
-            ) : (
-              <Link
-                key={link.name}
-                className='text-gray-800 hover:text-destructive px-3 py-2 rounded-md text-lg font-medium uppercase'
-                href={link.slug}
-                onClick={() => setIsOpen(!isOpen)}
-              >
-                {link.name}
-              </Link>
-            );
-          })}
+          {links.map((link) => (
+            <Link
+              key={link.name}
+              className='text-gray-800 hover:text-destructive px-3 py-2 rounded-md text-lg font-medium uppercase'
+              href={link.slug}
+              onClick={() => setIsOpen(!isOpen)}
+            >
+              {link.name}
+            </Link>
+          ))}
           <div className='flex flex-col w-[100vw] space-y-2 px-2 pt-4'>
             {buttons.map((button) => (
               <Link
