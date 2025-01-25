@@ -93,7 +93,7 @@ export default async function page() {
                   </div>
                   <h2 className='text-xl font-semibold mb-3'>{post.title}</h2>
                   <p className='text-gray-600 mb-4 flex-1'>{post.excerpt}</p>
-                  <Link href={`/news/${post.slug}`}>
+                  <Link href={`/events/${post.slug}`}>
                     <Button
                       variant='link'
                       className='p-0 self-start group'

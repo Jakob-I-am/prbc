@@ -17,6 +17,7 @@ import dining from '../../public/dining.jpg';
 import { getPostSlides } from '@/actions/blogPostActions';
 import { getGalleryImages } from '@/actions/imageActions';
 import { VideoComponent } from '../components/VideoComponent';
+import VideoSkeleton from '@/components/VideoSkeleton';
 
 export default function Home() {
   const posts = getPostSlides();
@@ -24,19 +25,19 @@ export default function Home() {
 
   return (
     <div className='w-full overflow-x-hidden'>
-      <section className='hidden md:block h-[77vh] w-full overflow-hidden'>
-        <Suspense fallback={<p>Loading video...</p>}>
+      <section className='hidden md:block h-[70vh] w-full overflow-hidden'>
+        <Suspense fallback={<VideoSkeleton />}>
           <VideoComponent fileName='PRBC-landscape.mp4' />
         </Suspense>
       </section>
 
-      <section className='md:hidden h-[82vh] w-full overflow-hidden'>
-        <Suspense fallback={<p>Loading video...</p>}>
+      <section className='md:hidden h-[80vh] w-full overflow-hidden'>
+        <Suspense fallback={<VideoSkeleton />}>
           <VideoComponent fileName='PRBC-portrait.mp4' />
         </Suspense>
       </section>
 
-      <section className='bg-white h-[18vh] md:h-[15vh] w-full overflow-hidden pt-4'>
+      <section className='bg-white h-[20vh] md:h-[22vh] w-full overflow-hidden pt-4'>
         <div className='flex flex-col items-center justify-center h-full text-primary p-4'>
           <h1 className='text-4xl md:text-6xl font-bold text-center my-4'>
             Parkes Railway Bowling Club

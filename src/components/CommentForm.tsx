@@ -134,7 +134,7 @@ export default function CommentForm({ slug }: { slug: string }) {
             <Button
               disabled={isPending}
               type='submit'
-              className='w-4/12 hover:bg-secondary hover:text-primary hover:scale-[1.0125] hover:border hover:border-primary'
+              className='w-6/12 md:w-4/12 hover:bg-secondary hover:text-primary hover:scale-[1.0125] hover:border hover:border-primary'
             >
               {isPending ? 'Posting...' : 'Post Comment'}
             </Button>
